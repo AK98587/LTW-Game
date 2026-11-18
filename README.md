@@ -41,6 +41,7 @@ Game point and click giải đố, phong cách Rusty Lake, làm bằng HTML, CSS
 ```text
 qua-den-game/
 ├── README.md
+├── AGENTS.md
 ├── docs/
 │   ├── 01-yeu-cau.md
 │   ├── 02-kien-truc.md
@@ -48,6 +49,9 @@ qua-den-game/
 │   ├── 04-api.md
 │   ├── 05-huong-dan-chay.md
 │   └── 06-ke-hoach.md
+│   ├── 07-huong-dan-lam-viec.md
+│   ├── 08-chia-viec-hoan-thanh.md
+│   └── 09-vibe-coding.md
 ├── frontend/
 │   ├── index.html
 │   ├── css/
@@ -71,7 +75,8 @@ qua-den-game/
 - Bước 1: import cơ sở dữ liệu
 
 ```bash
-mysql -u root -p < backend/sql/qua_den.sql
+mysql -u root -p < backend/db/schema.sql
+mysql -u root -p < backend/db/seed.sql
 ```
 
 - Bước 2: chạy back-end
@@ -103,6 +108,9 @@ php -S localhost:8000
 - [04. API](docs/04-api.md): danh sách endpoint, tham số, ví dụ response
 - [05. Hướng dẫn chạy](docs/05-huong-dan-chay.md): cài đặt và chạy trên Windows và Linux, xử lý lỗi thường gặp
 - [06. Kế hoạch](docs/06-ke-hoach.md): tiến độ hiện tại và bước tiếp theo
+- [07. Hướng dẫn làm việc nhóm](docs/07-huong-dan-lam-viec.md): chia file theo người, quy ước tách HTML/CSS với JS, quy trình nhánh và pull request để không xung đột
+- [08. Chia việc để hoàn thành](docs/08-chia-viec-hoan-thanh.md): bảng chia việc đầy đủ theo code, giai đoạn 1 trước 19/11
+- [09. Vibe coding](docs/09-vibe-coding.md): cách dùng AI để code trong nhóm, mẫu prompt cho từng người, lỗi thường gặp
 
 ## Trạng thái hiện tại
 

@@ -1,6 +1,6 @@
 # 04. API
 
-- Base URL local: `http://localhost:8000/api/index.php`
+- Base URL local: `http://localhost:8000/backend/api/index.php` (chay `php -S localhost:8000` tu thu muc goc project)
 - Mọi endpoint dùng chung 1 file `backend/api/index.php`, phân biệt bằng tham số `action`
 - GET dùng cho hành động chỉ đọc, POST dùng cho hành động ghi dữ liệu
 - POST gửi body JSON, header `Content-Type: application/json`
@@ -27,7 +27,7 @@
 ## 4.1. Đăng ký
 
 - Method: POST
-- URL: `api/index.php?action=register`
+- URL: `backend/api/index.php?action=register`
 - Body:
 
 ```json
@@ -63,7 +63,7 @@
 ## 4.2. Đăng nhập
 
 - Method: POST
-- URL: `api/index.php?action=login`
+- URL: `backend/api/index.php?action=login`
 - Body:
 
 ```json
@@ -97,10 +97,10 @@
 
 ## 4.3. Đăng xuất
 
-- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
+- Trạng thái: đã làm xong, có trong backend/api/index.php.
 
 - Method: POST
-- URL: `api/index.php?action=logout`
+- URL: `backend/api/index.php?action=logout`
 - Body: không cần
 - Xử lý: hủy session PHP
 - Response thành công:
@@ -115,7 +115,7 @@
 ## 4.4. Lấy danh sách chương
 
 - Method: GET
-- URL: `api/index.php?action=chapters`
+- URL: `backend/api/index.php?action=chapters`
 - Xử lý: lấy toàn bộ dòng trong CHUONG, xếp theo `thu_tu` tăng dần
 - Response thành công:
 
@@ -141,10 +141,10 @@
 
 ## 4.5. Lấy dữ liệu 1 chương để chơi
 
-- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
+- Trạng thái: đã làm xong, có trong backend/api/index.php.
 
 - Method: GET
-- URL: `api/index.php?action=chapter&ma_chuong=1`
+- URL: `backend/api/index.php?action=chapter&ma_chuong=1`
 - Xử lý: lấy phòng, đồ vật, câu đố, manh mối của chương, xếp theo `thu_tu`
 - Response thành công:
 
@@ -185,10 +185,10 @@
 
 ## 4.6. Lấy túi đồ
 
-- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
+- Trạng thái: đã làm xong, có trong backend/api/index.php.
 
 - Method: GET
-- URL: `api/index.php?action=inventory`
+- URL: `backend/api/index.php?action=inventory`
 - Yêu cầu: đã đăng nhập
 - Xử lý: lấy TUI_DO của người chơi trong session, nối với VAT_PHAM để lấy tên và mô tả
 - Response thành công:
@@ -210,10 +210,10 @@
 
 ## 4.7. Nhặt vật phẩm
 
-- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
+- Trạng thái: đã làm xong, có trong backend/api/index.php.
 
 - Method: POST
-- URL: `api/index.php?action=pickup`
+- URL: `backend/api/index.php?action=pickup`
 - Yêu cầu: đã đăng nhập
 - Body:
 
@@ -238,10 +238,10 @@
 
 ## 4.8. Giải câu đố
 
-- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
+- Trạng thái: đã làm xong, có trong backend/api/index.php.
 
 - Method: POST
-- URL: `api/index.php?action=solve`
+- URL: `backend/api/index.php?action=solve`
 - Yêu cầu: đã đăng nhập
 - Body:
 
@@ -292,7 +292,7 @@
 ## 4.9. Lưu game
 
 - Method: POST
-- URL: `api/index.php?action=save`
+- URL: `backend/api/index.php?action=save`
 - Yêu cầu: đã đăng nhập
 - Body:
 
@@ -326,7 +326,7 @@
 ## 4.10. Lấy danh sách bản lưu
 
 - Method: GET
-- URL: `api/index.php?action=load`
+- URL: `backend/api/index.php?action=load`
 - Yêu cầu: đã đăng nhập
 - Xử lý: lấy các dòng LUU_GAME của người chơi trong session, xếp theo `ngay_luu` giảm dần
 - Response thành công:
@@ -351,7 +351,7 @@
 ## 4.11. Tải 1 bản lưu
 
 - Method: GET
-- URL: `api/index.php?action=load&ma_luu=5`
+- URL: `backend/api/index.php?action=load&ma_luu=5`
 - Yêu cầu: đã đăng nhập, bản lưu thuộc về người chơi trong session
 - Xử lý: đọc LUU_GAME theo `ma_luu`, đọc TUI_DO và TIEN_DO_CAU_DO theo `ma_luu`
 - Response thành công:
@@ -379,7 +379,7 @@
 ## 4.12. Lấy bảng xếp hạng
 
 - Method: GET
-- URL: `api/index.php?action=leaderboard&ma_chuong=1`
+- URL: `backend/api/index.php?action=leaderboard&ma_chuong=1`
 - Xử lý: lấy BANG_XEP_HANG theo `ma_chuong`, nối NGUOI_CHOI để lấy `ten_dang_nhap`, xếp theo `thoi_gian_hoan_thanh` tăng dần, giới hạn 20 dòng
 - Response thành công:
 
@@ -399,7 +399,7 @@
 ## 4.13. Ghi bảng xếp hạng
 
 - Method: POST
-- URL: `api/index.php?action=leaderboard`
+- URL: `backend/api/index.php?action=leaderboard`
 - Yêu cầu: đã đăng nhập
 - Body:
 
