@@ -7,19 +7,18 @@
 // Moi tra loi deu la JSON dang { ok: true, data: ... }
 // hoac { ok: false, error: "..." }, kem ma HTTP dung.
 //
-// DANH SACH ENDPOINT (da chay duoc):
+// DANH SACH ENDPOINT KHUNG XUONG (da chay duoc):
 //   register    POST  dang ky tai khoan moi, bang NGUOI_CHOI
 //   login       POST  dang nhap, mo session
-//   logout      POST  dang xuat, huy session
-//   chapters    GET   danh sach 6 chuong, kem so phong
-//   chapter     GET   chi tiet 1 chuong: phong, do vat, cau do, manh moi
-//   inventory   GET   tui do cua nguoi dang nhap (can dang nhap)
-//   pickup      POST  nhat vat pham vao tui do (can dang nhap)
-//   solve       POST  giai cau do, doi chieu dap an o server (can dang nhap)
 //   save        POST  luu game, bang LUU_GAME + TIEN_DO_CAU_DO (can dang nhap)
 //   load        GET   tai ban luu moi nhat, kem tien do cau do (can dang nhap)
 //   leaderboard GET   xem bang xep hang theo chuong
 //   leaderboard POST  ghi diem len bang xep hang, bang BANG_XEP_HANG (can dang nhap)
+//   chapters    GET   danh sach 6 chuong, kem so phong
+//
+// VIEC CON LAI CHO NHOM (xem them README, muc "Viec con lai"):
+//   logout, chapter (chi tiet 1 chuong), inventory, pickup, solve.
+// Moi endpoint co ghi chu "Ghi chu cho thanh vien" de nguoi nhan viec biet can lam gi.
 
 require __DIR__ . '/../config.php';
 
@@ -84,46 +83,10 @@ function can_dang_nhap() {
 }
 
 // Chuan hoa chuoi nhap: cat khoang trang hai dau, doi thanh chu thuong.
-// Dung mb_strtolower neu co extension mbstring, neu khong thi dung
-// strtolower de code van chay duoc tren may chua cai mbstring.
 function chuan_hoa($chuoi) {
     $chuoi = trim($chuoi);
     $chuoi = preg_replace('/\s+/', ' ', $chuoi);
-    // Bo dau tieng Viet de dap an co dau va khong dau deu chap nhan duoc.
-    // Vi du: "keo chot theo ranh chu L" trong DB khop voi
-    // "kéo chốt theo rãnh chữ L" nguoi choi go tren trinh duyet.
-    $bang_dau = [
-        'à' => 'a', 'á' => 'a', 'ả' => 'a', 'ã' => 'a', 'ạ' => 'a',
-        'â' => 'a', 'ầ' => 'a', 'ấ' => 'a', 'ẩ' => 'a', 'ẫ' => 'a', 'ậ' => 'a',
-        'ă' => 'a', 'ằ' => 'a', 'ắ' => 'a', 'ẳ' => 'a', 'ẵ' => 'a', 'ặ' => 'a',
-        'À' => 'a', 'Á' => 'a', 'Ả' => 'a', 'Ã' => 'a', 'Ạ' => 'a',
-        'Â' => 'a', 'Ầ' => 'a', 'Ấ' => 'a', 'Ẩ' => 'a', 'Ẫ' => 'a', 'Ậ' => 'a',
-        'Ă' => 'a', 'Ằ' => 'a', 'Ắ' => 'a', 'Ẳ' => 'a', 'Ẵ' => 'a', 'Ặ' => 'a',
-        'è' => 'e', 'é' => 'e', 'ẻ' => 'e', 'ẽ' => 'e', 'ẹ' => 'e',
-        'ê' => 'e', 'ề' => 'e', 'ế' => 'e', 'ể' => 'e', 'ễ' => 'e', 'ệ' => 'e',
-        'È' => 'e', 'É' => 'e', 'Ẻ' => 'e', 'Ẽ' => 'e', 'Ẹ' => 'e',
-        'Ê' => 'e', 'Ề' => 'e', 'Ế' => 'e', 'Ể' => 'e', 'Ễ' => 'e', 'Ệ' => 'e',
-        'ì' => 'i', 'í' => 'i', 'ỉ' => 'i', 'ĩ' => 'i', 'ị' => 'i',
-        'Ì' => 'i', 'Í' => 'i', 'Ỉ' => 'i', 'Ĩ' => 'i', 'Ị' => 'i',
-        'ò' => 'o', 'ó' => 'o', 'ỏ' => 'o', 'õ' => 'o', 'ọ' => 'o',
-        'ô' => 'o', 'ồ' => 'o', 'ố' => 'o', 'ổ' => 'o', 'ỗ' => 'o', 'ộ' => 'o',
-        'ơ' => 'o', 'ờ' => 'o', 'ớ' => 'o', 'ở' => 'o', 'ỡ' => 'o', 'ợ' => 'o',
-        'Ò' => 'o', 'Ó' => 'o', 'Ỏ' => 'o', 'Õ' => 'o', 'Ọ' => 'o',
-        'Ô' => 'o', 'Ồ' => 'o', 'Ố' => 'o', 'Ổ' => 'o', 'Ỗ' => 'o', 'Ộ' => 'o',
-        'Ơ' => 'o', 'Ờ' => 'o', 'Ớ' => 'o', 'Ở' => 'o', 'Ỡ' => 'o', 'Ợ' => 'o',
-        'ù' => 'u', 'ú' => 'u', 'ủ' => 'u', 'ũ' => 'u', 'ụ' => 'u',
-        'ư' => 'u', 'ừ' => 'u', 'ứ' => 'u', 'ử' => 'u', 'ữ' => 'u', 'ự' => 'u',
-        'Ù' => 'u', 'Ú' => 'u', 'Ủ' => 'u', 'Ũ' => 'u', 'Ụ' => 'u',
-        'Ư' => 'u', 'Ừ' => 'u', 'Ứ' => 'u', 'Ử' => 'u', 'Ữ' => 'u', 'Ự' => 'u',
-        'ỳ' => 'y', 'ý' => 'y', 'ỷ' => 'y', 'ỹ' => 'y', 'ỵ' => 'y',
-        'Ỳ' => 'y', 'Ý' => 'y', 'Ỷ' => 'y', 'Ỹ' => 'y', 'Ỵ' => 'y',
-        'đ' => 'd', 'Đ' => 'd',
-    ];
-    $chuoi = strtr($chuoi, $bang_dau);
-    if (function_exists('mb_strtolower')) {
-        return mb_strtolower($chuoi, 'UTF-8');
-    }
-    return strtolower($chuoi);
+    return mb_strtolower($chuoi, 'UTF-8');
 }
 
 // =====================================================================
@@ -432,252 +395,6 @@ if ($action === 'leaderboard') {
     }
     unset($dong);
     tra_loi($bang);
-}
-
-// =====================================================================
-// POST ?action=logout
-// Dang xuat: huy session va xoa cookie session.
-// Khong can dang nhap truoc, goi luc nao cung duoc.
-// Tra ve: { da_dang_xuat: true }
-// =====================================================================
-if ($action === 'logout') {
-    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-        tra_loi_loi('Chi chap nhan POST.', 405);
-    }
-    $_SESSION = [];
-    if (ini_get('session.use_cookies')) {
-        $tham_so = session_get_cookie_params();
-        setcookie(session_name(), '', time() - 3600, $tham_so['path'], $tham_so['domain'], $tham_so['secure'], $tham_so['httponly']);
-    }
-    session_destroy();
-    tra_loi(['da_dang_xuat' => true]);
-}
-
-// =====================================================================
-// GET ?action=chapter&ma_chuong=1
-// Chi tiet 1 chuong de choi: thong tin chuong, danh sach phong, moi phong
-// kem do vat, cau do va manh moi cua tung cau do.
-// Khong can dang nhap.
-// QUAN TRONG: khong bao gio select cot dap_an cua CAU_DO, dap an chi
-// duoc doi chieu o phia server trong endpoint solve.
-// =====================================================================
-if ($action === 'chapter') {
-    $ma_chuong = isset($_GET['ma_chuong']) ? (int) $_GET['ma_chuong'] : 0;
-    if ($ma_chuong <= 0) {
-        tra_loi_loi('Thieu ma_chuong.');
-    }
-
-    $tim_chuong = $pdo->prepare('SELECT ma_chuong, ten_chuong, thu_tu, mo_ta FROM CHUONG WHERE ma_chuong = ?');
-    $tim_chuong->execute([$ma_chuong]);
-    $chuong = $tim_chuong->fetch();
-    if ($chuong === false) {
-        tra_loi_loi('Chuong khong ton tai.', 404);
-    }
-
-    $lay_phong = $pdo->prepare('SELECT ma_phong, ten_phong, thu_tu FROM PHONG WHERE ma_chuong = ? ORDER BY thu_tu ASC');
-    $lay_phong->execute([$ma_chuong]);
-    $phong_list = $lay_phong->fetchAll();
-
-    $lay_do_vat = $pdo->prepare('SELECT ma_do_vat, ten_do_vat, vi_tri_x, vi_tri_y FROM DO_VAT WHERE ma_phong = ? ORDER BY ma_do_vat ASC');
-    // Chu y: khong select dap_an. Frontend chi biet ten va mo ta cau do.
-    $lay_cau_do = $pdo->prepare(
-        'SELECT ma_cau_do, ten_cau_do, thu_tu, mo_ta, ma_vat_pham_can, ma_vat_pham_thuong' .
-        ' FROM CAU_DO WHERE ma_phong = ? ORDER BY thu_tu ASC'
-    );
-    $lay_manh_moi = $pdo->prepare('SELECT ma_manh_moi, noi_dung FROM MANH_MOI WHERE ma_cau_do = ? ORDER BY ma_manh_moi ASC');
-
-    foreach ($phong_list as &$phong) {
-        $phong['ma_phong'] = (int) $phong['ma_phong'];
-        $lay_do_vat->execute([(int) $phong['ma_phong']]);
-        $phong['do_vat'] = $lay_do_vat->fetchAll();
-        foreach ($phong['do_vat'] as &$vat) {
-            $vat['ma_do_vat'] = (int) $vat['ma_do_vat'];
-            $vat['vi_tri_x'] = $vat['vi_tri_x'] === null ? null : (int) $vat['vi_tri_x'];
-            $vat['vi_tri_y'] = $vat['vi_tri_y'] === null ? null : (int) $vat['vi_tri_y'];
-        }
-        unset($vat);
-
-        $lay_cau_do->execute([(int) $phong['ma_phong']]);
-        $cau_do_list = $lay_cau_do->fetchAll();
-        foreach ($cau_do_list as &$cau_do) {
-            $cau_do['ma_cau_do'] = (int) $cau_do['ma_cau_do'];
-            $cau_do['ma_vat_pham_can'] = $cau_do['ma_vat_pham_can'] === null ? null : (int) $cau_do['ma_vat_pham_can'];
-            $cau_do['ma_vat_pham_thuong'] = $cau_do['ma_vat_pham_thuong'] === null ? null : (int) $cau_do['ma_vat_pham_thuong'];
-            $lay_manh_moi->execute([(int) $cau_do['ma_cau_do']]);
-            $cau_do['manh_moi'] = $lay_manh_moi->fetchAll();
-            foreach ($cau_do['manh_moi'] as &$moi) {
-                $moi['ma_manh_moi'] = (int) $moi['ma_manh_moi'];
-            }
-            unset($moi);
-        }
-        unset($cau_do);
-        $phong['cau_do'] = $cau_do_list;
-    }
-    unset($phong);
-
-    $chuong['ma_chuong'] = (int) $chuong['ma_chuong'];
-    $chuong['phong'] = $phong_list;
-    tra_loi($chuong);
-}
-
-// =====================================================================
-// GET ?action=inventory
-// Tui do cua nguoi dang nhap: join TUI_DO voi VAT_PHAM.
-// Tra ve: mang { ma_vat_pham, ten_vat_pham, mo_ta, so_luong, ngay_nhat }.
-// =====================================================================
-if ($action === 'inventory') {
-    $ma_nguoi_choi = can_dang_nhap();
-    $lay = $pdo->prepare(
-        'SELECT t.ma_vat_pham, v.ten_vat_pham, v.mo_ta, t.so_luong, t.ngay_nhat' .
-        ' FROM TUI_DO t JOIN VAT_PHAM v ON v.ma_vat_pham = t.ma_vat_pham' .
-        ' WHERE t.ma_nguoi_choi = ? ORDER BY t.ngay_nhat ASC'
-    );
-    $lay->execute([$ma_nguoi_choi]);
-    $tui = $lay->fetchAll();
-    foreach ($tui as &$dong) {
-        $dong['ma_vat_pham'] = (int) $dong['ma_vat_pham'];
-        $dong['so_luong'] = (int) $dong['so_luong'];
-    }
-    unset($dong);
-    tra_loi($tui);
-}
-
-// =====================================================================
-// POST ?action=pickup
-// Nhat vat pham vao tui do. Can dang nhap.
-// Gui len: { ma_vat_pham, so_luong } (so_luong mac dinh 1).
-// Neu vat pham da co trong tui thi tang so_luong, khong tao dong moi.
-// Tra ve: { ma_vat_pham, ten_vat_pham, so_luong }.
-// =====================================================================
-if ($action === 'pickup') {
-    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-        tra_loi_loi('Chi chap nhan POST.', 405);
-    }
-    $ma_nguoi_choi = can_dang_nhap();
-    $du_lieu = doc_du_lieu();
-    $ma_vat_pham = (int) ($du_lieu['ma_vat_pham'] ?? 0);
-    $so_luong = (int) ($du_lieu['so_luong'] ?? 1);
-    if ($ma_vat_pham <= 0) {
-        tra_loi_loi('Thieu ma_vat_pham.');
-    }
-    if ($so_luong < 1) {
-        $so_luong = 1;
-    }
-
-    $tim = $pdo->prepare('SELECT ma_vat_pham, ten_vat_pham FROM VAT_PHAM WHERE ma_vat_pham = ?');
-    $tim->execute([$ma_vat_pham]);
-    $vat_pham = $tim->fetch();
-    if ($vat_pham === false) {
-        tra_loi_loi('Vat pham khong ton tai.', 404);
-    }
-
-    $them = $pdo->prepare(
-        'INSERT INTO TUI_DO (ma_nguoi_choi, ma_vat_pham, so_luong, ngay_nhat)' .
-        ' VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE so_luong = so_luong + VALUES(so_luong), ngay_nhat = NOW()'
-    );
-    $them->execute([$ma_nguoi_choi, $ma_vat_pham, $so_luong]);
-
-    $dem = $pdo->prepare('SELECT so_luong FROM TUI_DO WHERE ma_nguoi_choi = ? AND ma_vat_pham = ?');
-    $dem->execute([$ma_nguoi_choi, $ma_vat_pham]);
-    $dong = $dem->fetch();
-
-    tra_loi([
-        'ma_vat_pham' => $ma_vat_pham,
-        'ten_vat_pham' => $vat_pham['ten_vat_pham'],
-        'so_luong' => (int) $dong['so_luong'],
-    ], 201);
-}
-
-// =====================================================================
-// POST ?action=solve
-// Giai cau do. Can dang nhap.
-// Gui len: { ma_cau_do, dap_an, ma_luu } (ma_luu khong bat buoc).
-// Xu ly o server:
-//   1. Lay dap_an, ma_vat_pham_can, ma_vat_pham_thuong cua cau do tu DB.
-//   2. Neu cau do can vat pham ma nguoi choi chua co thi tra correct: false.
-//   3. Doi chieu dap an gui len voi dap an trong DB (chuan hoa truoc khi so).
-//   4. Neu dung va co ma_luu thi ghi TIEN_DO_CAU_DO, thuong vat pham
-//      (neu co) vao TUI_DO.
-// Tra ve: { correct: true/false, ma_cau_do, thuong: { ma_vat_pham,
-//   ten_vat_pham } hoac null }. KHONG BAO GIO tra dap an dung ra ngoai.
-// =====================================================================
-if ($action === 'solve') {
-    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
-        tra_loi_loi('Chi chap nhan POST.', 405);
-    }
-    $ma_nguoi_choi = can_dang_nhap();
-    $du_lieu = doc_du_lieu();
-    $ma_cau_do = (int) ($du_lieu['ma_cau_do'] ?? 0);
-    $dap_an_gui = $du_lieu['dap_an'] ?? '';
-    $ma_luu = isset($du_lieu['ma_luu']) ? (int) $du_lieu['ma_luu'] : 0;
-
-    if ($ma_cau_do <= 0) {
-        tra_loi_loi('Thieu ma_cau_do.');
-    }
-    if (!is_string($dap_an_gui) || trim($dap_an_gui) === '') {
-        tra_loi_loi('Thieu dap_an.');
-    }
-
-    $tim = $pdo->prepare(
-        'SELECT ma_cau_do, dap_an, ma_vat_pham_can, ma_vat_pham_thuong FROM CAU_DO WHERE ma_cau_do = ?'
-    );
-    $tim->execute([$ma_cau_do]);
-    $cau_do = $tim->fetch();
-    if ($cau_do === false) {
-        tra_loi_loi('Cau do khong ton tai.', 404);
-    }
-    if ($cau_do['dap_an'] === null || trim($cau_do['dap_an']) === '') {
-        tra_loi_loi('Cau do nay khong giai bang dap an van ban.', 400);
-    }
-
-    // Kiem tra vat pham can thiet truoc khi doi chieu dap an.
-    $ma_vat_pham_can = $cau_do['ma_vat_pham_can'] === null ? null : (int) $cau_do['ma_vat_pham_can'];
-    if ($ma_vat_pham_can !== null) {
-        $kiem_tui = $pdo->prepare('SELECT ma_vat_pham FROM TUI_DO WHERE ma_nguoi_choi = ? AND ma_vat_pham = ?');
-        $kiem_tui->execute([$ma_nguoi_choi, $ma_vat_pham_can]);
-        if ($kiem_tui->fetch() === false) {
-            tra_loi(['correct' => false, 'ma_cau_do' => $ma_cau_do, 'ly_do' => 'thieu_vat_pham', 'thuong' => null]);
-        }
-    }
-
-    $dung = chuan_hoa($dap_an_gui) === chuan_hoa($cau_do['dap_an']);
-    if (!$dung) {
-        tra_loi(['correct' => false, 'ma_cau_do' => $ma_cau_do, 'ly_do' => 'sai_dap_an', 'thuong' => null]);
-    }
-
-    // Giai dung: ghi tien do neu co ma_luu, thuong vat pham neu co.
-    $thuong = null;
-    $ma_vat_pham_thuong = $cau_do['ma_vat_pham_thuong'] === null ? null : (int) $cau_do['ma_vat_pham_thuong'];
-    if ($ma_luu > 0) {
-        $kiem_luu = $pdo->prepare('SELECT ma_luu FROM LUU_GAME WHERE ma_luu = ? AND ma_nguoi_choi = ?');
-        $kiem_luu->execute([$ma_luu, $ma_nguoi_choi]);
-        if ($kiem_luu->fetch() === false) {
-            tra_loi_loi('Ban luu khong ton tai hoac khong phai cua ban.', 404);
-        }
-        $ghi = $pdo->prepare(
-            'INSERT INTO TIEN_DO_CAU_DO (ma_luu, ma_cau_do, da_hoan_thanh, ngay_giai)' .
-            ' VALUES (?, ?, 1, NOW()) ON DUPLICATE KEY UPDATE da_hoan_thanh = 1, ngay_giai = NOW()'
-        );
-        $ghi->execute([$ma_luu, $ma_cau_do]);
-    }
-    if ($ma_vat_pham_thuong !== null) {
-        $them_thuong = $pdo->prepare(
-            'INSERT INTO TUI_DO (ma_nguoi_choi, ma_vat_pham, so_luong, ngay_nhat)' .
-            ' VALUES (?, ?, 1, NOW()) ON DUPLICATE KEY UPDATE so_luong = so_luong + 1, ngay_nhat = NOW()'
-        );
-        $them_thuong->execute([$ma_nguoi_choi, $ma_vat_pham_thuong]);
-        $tim_thuong = $pdo->prepare('SELECT ma_vat_pham, ten_vat_pham FROM VAT_PHAM WHERE ma_vat_pham = ?');
-        $tim_thuong->execute([$ma_vat_pham_thuong]);
-        $dong_thuong = $tim_thuong->fetch();
-        if ($dong_thuong !== false) {
-            $thuong = [
-                'ma_vat_pham' => (int) $dong_thuong['ma_vat_pham'],
-                'ten_vat_pham' => $dong_thuong['ten_vat_pham'],
-            ];
-        }
-    }
-
-    tra_loi(['correct' => true, 'ma_cau_do' => $ma_cau_do, 'ly_do' => null, 'thuong' => $thuong]);
 }
 
 // Khong co action nao khop thi tra loi 404.
