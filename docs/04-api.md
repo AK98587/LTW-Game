@@ -97,7 +97,7 @@
 
 ## 4.3. Đăng xuất
 
-- Trạng thái: đã làm xong, có trong backend/api/index.php.
+- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
 
 - Method: POST
 - URL: `backend/api/index.php?action=logout`
@@ -141,7 +141,7 @@
 
 ## 4.5. Lấy dữ liệu 1 chương để chơi
 
-- Trạng thái: đã làm xong, có trong backend/api/index.php.
+- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
 
 - Method: GET
 - URL: `backend/api/index.php?action=chapter&ma_chuong=1`
@@ -185,7 +185,7 @@
 
 ## 4.6. Lấy túi đồ
 
-- Trạng thái: đã làm xong, có trong backend/api/index.php.
+- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
 
 - Method: GET
 - URL: `backend/api/index.php?action=inventory`
@@ -210,7 +210,7 @@
 
 ## 4.7. Nhặt vật phẩm
 
-- Trạng thái: đã làm xong, có trong backend/api/index.php.
+- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
 
 - Method: POST
 - URL: `backend/api/index.php?action=pickup`
@@ -238,7 +238,7 @@
 
 ## 4.8. Giải câu đố
 
-- Trạng thái: đã làm xong, có trong backend/api/index.php.
+- Trạng thái: chưa làm, chỉ có trong docs, là phần việc cho nhóm làm tiếp.
 
 - Method: POST
 - URL: `backend/api/index.php?action=solve`
