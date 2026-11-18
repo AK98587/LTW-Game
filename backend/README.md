@@ -1,8 +1,9 @@
 # Backend game Quạ Đen
 
 Backend PHP thuần, khong dung framework, dung PDO noi MySQL.
-Day la khung xuong de chia viec cho nhom, moi endpoint da chay duoc
-o muc toi thieu, thanh vien nhan viec se lam tiep phan cua minh.
+Du 11 action: dang ky, dang nhap, dang xuat, danh sach chuong, chi tiet
+chuong, tui do, nhat vat pham, giai cau do, luu game, tai ban luu,
+bang xep hang.
 
 ## Cau truc thu muc
 
@@ -96,7 +97,12 @@ kem `credentials: 'include'` de trinh duyet gui cookie session.
 | --- | --- | --- | --- |
 | `?action=register` | POST | Khong | Dang ky tai khoan moi, bang NGUOI_CHOI |
 | `?action=login` | POST | Khong | Dang nhap, mo session |
+| `?action=logout` | POST | Khong | Dang xuat, huy session |
 | `?action=chapters` | GET | Khong | Danh sach 6 chuong, kem so phong va so cau do |
+| `?action=chapter&ma_chuong=1` | GET | Khong | Chi tiet 1 chuong: phong, do vat, cau do, manh moi (khong tra dap_an) |
+| `?action=inventory` | GET | Co | Tui do cua nguoi dang nhap, join TUI_DO voi VAT_PHAM |
+| `?action=pickup` | POST | Co | Nhat vat pham vao tui do, tang so_luong neu da co |
+| `?action=solve` | POST | Co | Giai cau do, doi chieu dap an o server, tra correct true/false |
 | `?action=save` | POST | Co | Luu game, bang LUU_GAME + TIEN_DO_CAU_DO |
 | `?action=load` | GET | Co | Tai ban luu moi nhat, kem tien do cau do |
 | `?action=leaderboard` | GET | Khong | Xem bang xep hang theo chuong, tang dan theo thoi gian |
@@ -124,11 +130,77 @@ curl -X POST http://localhost:8000/backend/api/?action=login \
   -d '{"ten_dang_nhap": "an", "mat_khau": "123456"}'
 ```
 
+### Dang xuat
+
+```bash
+curl -X POST http://localhost:8000/backend/api/?action=logout \
+  -b cookies.txt
+```
+
 ### Xem danh sach chuong
 
 ```bash
 curl http://localhost:8000/backend/api/?action=chapters
 ```
+
+### Xem chi tiet chuong 1
+
+```bash
+curl "http://localhost:8000/backend/api/?action=chapter&ma_chuong=1"
+```
+
+Ket qua gom phong, do vat, cau do va manh moi cua chuong.
+Cau do khong kem dap_an, dap an chi duoc doi chieu o server.
+
+### Xem tui do
+
+```bash
+curl http://localhost:8000/backend/api/?action=inventory -b cookies.txt
+```
+
+### Nhat vat pham
+
+```bash
+curl -X POST http://localhost:8000/backend/api/?action=pickup \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"ma_vat_pham": 9}'
+```
+
+Nhat lai cung vat pham thi so_luong tang len, khong tao dong moi.
+
+### Giai cau do
+
+Giai cau 1, chot cua ranh chu L:
+
+```bash
+curl -X POST http://localhost:8000/backend/api/?action=solve \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"ma_cau_do": 1, "dap_an": "keo chot theo ranh chu L"}'
+```
+
+Tra ve `{"correct": true, ...}` neu dung, `{"correct": false, ...}`
+neu sai hoac thieu vat pham can thiet. Dap an dung khong bao gio
+duoc tra ra ngoai.
+
+Giai cau 2 can moc ao uon cong (ma_vat_pham 9) trong tui do truoc,
+neu chua nhat thi tra `correct: false` voi `ly_do: thieu_vat_pham`:
+
+```bash
+curl -X POST http://localhost:8000/backend/api/?action=pickup \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"ma_vat_pham": 9}'
+curl -X POST http://localhost:8000/backend/api/?action=solve \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"ma_cau_do": 2, "dap_an": "moc ao uon cong", "ma_luu": 1}'
+```
+
+Gui kem `ma_luu` thi tien do duoc ghi vao TIEN_DO_CAU_DO.
+Giai xong cau 4 thi duoc thuong chia dong (ma_vat_pham 1),
+giai xong cau 8 thi duoc thuong Trang so so 1 (ma_vat_pham 2).
 
 ### Luu game
 
@@ -186,18 +258,5 @@ curl "http://localhost:8000/backend/api/?action=leaderboard&ma_chuong=1&limit=10
 
 ## Viec con lai cho nhom
 
-Khung xuong chi co 6 endpoint toi thieu. Cac viec duoi day de thanh
-vien nhan lam tiep, moi viec viet them mot khoi `if ($action === ...)`
-trong `backend/api/index.php`, theo dung mau cac endpoint da co:
-
-- `logout` POST: huy session bang `session_destroy()`.
-- `chapter` GET `?ma_chuong=`: chi tiet 1 chuong, kem phong, do vat,
-  cau do. Chu y: chi select cac cot can thiet, khong select `dap_an`.
-- `inventory` GET: tui do cua nguoi dang nhap, join TUI_DO voi VAT_PHAM.
-- `pickup` POST: nhat vat pham, them vao TUI_DO, tang `so_luong` neu da co.
-- `solve` POST: nhan `ma_cau_do` va `dap_an`, kiem tra vat pham can
-  trong tui do, doi chieu dap an voi DB o phia server, ghi TIEN_DO_CAU_DO
-  va thuong vat pham neu dung. Dap an sai thi tra `correct: false`,
-  khong bao gio tra dap an dung ra ngoai.
 - Seed bo sung: kich ban co 46 cau do, hien seed moi co 18 cau mau.
   Thanh vien phu trach cot truyen them cau do vao `db/seed.sql`.
