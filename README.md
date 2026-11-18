@@ -106,7 +106,7 @@ php -S localhost:8000
 - [02. Kiến trúc](docs/02-kien-truc.md): sơ đồ Front-end, Back-end, Database, luồng request, sequence đăng nhập và lưu game
 - [03. Cơ sở dữ liệu](docs/03-csdl.md): 11 bảng, cột, khóa chính, khóa ngoại, quan hệ
 - [04. API](docs/04-api.md): danh sách endpoint, tham số, ví dụ response
-- [05. Hướng dẫn chạy](docs/05-huong-dan-chay.md): cài đặt và chạy trên Windows và Linux, xử lý lỗi thường gặp
+- [05. Hướng dẫn chạy](docs/05-huong-dan-chay.md): cài đặt và chạy trên Windows bằng XAMPP hoặc Laragon và trên Linux, xử lý lỗi thường gặp
 - [06. Kế hoạch](docs/06-ke-hoach.md): tiến độ hiện tại và bước tiếp theo
 - [07. Hướng dẫn làm việc nhóm](docs/07-huong-dan-lam-viec.md): chia file theo người, quy ước tách HTML/CSS với JS, quy trình nhánh và pull request để không xung đột
 - [08. Chia việc để hoàn thành](docs/08-chia-viec-hoan-thanh.md): bảng chia việc đầy đủ theo code, giai đoạn 1 trước 19/11
