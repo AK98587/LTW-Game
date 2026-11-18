@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Quạ Đen: Sáu Vụ Án Sài Gòn 1998</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topnav">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="crow">&#10022;</span> QUẠ ĐEN <small>Sài Gòn 1998</small></a>
+      <a class="navlink" href="index.html">Trang chủ</a>
+      <a class="navlink" href="game.html">Chơi game</a>
+      <a class="navlink" href="leaderboard.html">Bảng xếp hạng</a>
+      <span class="nav-user hidden" id="navUser"></span>
+      <a class="navlink hidden" id="navLogout" href="#" onclick="return false;">Đăng xuất</a>
+      <a class="navlink" id="navLogin" href="auth.html">Đăng nhập</a>
+      <a class="btn small" id="navRegister" href="auth.html#dang-ky">Đăng ký</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Game point and click giải đố, phong cách Rusty Lake</p>
+        <h1>QUẠ ĐEN:<br />Sáu Vụ Án <span class="year">Sài Gòn 1998</span></h1>
+        <p class="tagline">Một vụ án duy nhất. 6 trang sổ. 1 ngày 1 đêm.</p>
+        <div class="story">
+          <b>Chú Bảo</b> giữ sổ giao hàng của Công ty Vận tải và Kho vận Hòa Bình.
+          Chú phát hiện quản lý <b>Phạm Đức Long</b> sửa số cân để rút thuốc giá cao đem bán chợ đen.
+          Trước khi biến mất, chú chép tay số thật của 6 chuyến hàng vào 6 trang rời đóng dấu quạ đen,
+          giấu mỗi trang ở một nơi trên tuyến đường làm việc cuối cùng của mình.
+          Bạn vào vai <b>An</b>, cháu ruột của chú Bảo, chạy đua từ sáng 10/03 đến 09:00 sáng 11/03
+          để tìm đủ 6 trang sổ trước giờ kiểm tra sổ.
+        </div>
+        <div class="btn-row">
+          <a class="btn" href="game.html">Chơi ngay, Chương 1</a>
+          <a class="btn ghost" href="auth.html">Đăng nhập / Đăng ký</a>
+          <a class="btn ghost" href="leaderboard.html">Xem bảng xếp hạng</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>6</b><span>Chương</span></div>
+          <div class="stat"><b>20</b><span>Phòng</span></div>
+          <div class="stat"><b>46</b><span>Câu đố</span></div>
+          <div class="stat"><b>116 kg</b><span>Tổng lệch số cân</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>6 chương của vụ án</h2>
+        <p class="muted">Chỉ Chương 1 chơi được trong bản demo hiện tại. Các chương sau sẽ mở dần khi nhóm hoàn thành code.</p>
+        <div class="grid" id="chapterGrid">
+          <article class="card current">
+            <p class="meta">Chương 1, chơi được</p>
+            <h3><span class="no">01</span>Căn phòng khóa trái ở hẻm 41</h3>
+            <p>Nhà trọ Sáu Lành, hẻm 41, Quận 5. Tìm Trang sổ số 1 trong phòng trọ của chú Bảo.</p>
+            <p><a class="btn small" href="game.html">Vào chơi</a></p>
+          </article>
+          <article class="card locked">
+            <p class="meta">Chương 2, sắp mở</p>
+            <h3><span class="no">02</span>Buổi chiếu cuối ở rạp Lệ Thanh</h3>
+            <p>Trang sổ số 2 giấu trong rạp chiếu bóng cũ ở Chợ Lớn.</p>
+          </article>
+          <article class="card locked">
+            <p class="meta">Chương 3, sắp mở</p>
+            <h3><span class="no">03</span>Tiệm radio Chính Phát ở Nhật Tảo</h3>
+            <p>Trang sổ số 3 nằm sau quầy radio của ông chủ tiệm khó tính.</p>
+          </article>
+          <article class="card locked">
+            <p class="meta">Chương 4, sắp mở</p>
+            <h3><span class="no">04</span>Chuyến xe đò lúc nửa đêm</h3>
+            <p>Trang sổ số 4 theo chuyến xe đò rời Bến xe Chợ Lớn lúc nửa đêm.</p>
+          </article>
+          <article class="card locked">
+            <p class="meta">Chương 5, sắp mở</p>
+            <h3><span class="no">05</span>Nhà thuốc An Bình và lọ thuốc không nhãn</h3>
+            <p>Trang sổ số 5 nằm trong két nhà thuốc, mã két là 0312.</p>
+          </article>
+          <article class="card locked">
+            <p class="meta">Chương 6, sắp mở</p>
+            <h3><span class="no">06</span>Nhà in Mực Tím trong đêm cuối</h3>
+            <p>Trang sổ số 6 và cuộc gặp mặt cuối cùng với chú Bảo, trước 09:00 ngày 11/03.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>Bảng xếp hạng, Chương 1</h2>
+        <p class="muted">Tốc độ phá đảo (speedrun) theo từng chương. Hoàn thành càng nhanh, xếp hạng càng cao.</p>
+        <p class="status-line" id="homeLbStatus">Đang tải bảng xếp hạng...</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Hạng</th><th>Người chơi</th><th>Thời gian</th><th>Gợi ý đã dùng</th><th>Ngày hoàn thành</th></tr>
+            </thead>
+            <tbody id="homeLbBody"></tbody>
+          </table>
+          <p class="empty-note hidden" id="homeLbEmpty">Chương 1 chưa có ai hoàn thành. Bạn có thể là người đầu tiên.</p>
+        </div>
+        <p style="margin-top:14px;"><a href="leaderboard.html">Xem đầy đủ bảng xếp hạng theo từng chương</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <b>QUẠ ĐEN, Sáu Vụ Án Sài Gòn 1998</b><br />
+      Nhóm 5, môn Lập trình website, GVHD: ThS. Trần Thịnh Mạnh Đức<br />
+      Game thuần HTML, CSS, JavaScript, lưu trữ trên MySQL.
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    /* Bảng xếp hạng thu nhỏ trên trang chủ (top 5, Chương 1). */
+    document.addEventListener("DOMContentLoaded", function () {
+      var status = document.getElementById("homeLbStatus");
+      var body = document.getElementById("homeLbBody");
+      var empty = document.getElementById("homeLbEmpty");
+      function fmtTime(v) {
+        if (v === null || v === undefined || v === "") return "-";
+        var s = parseInt(v, 10);
+        if (isNaN(s)) return String(v);
+        return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
+      }
+      function fmtDate(v) {
+        if (!v) return "-";
+        var d = new Date(String(v).replace(" ", "T"));
+        if (isNaN(d.getTime())) return String(v);
+        return d.toLocaleDateString("vi-VN") + " " + d.toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" });
+      }
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+      QD.getLeaderboard(1).then(function (data) {
+        var rows = (data && (data.rows || data.bang_xep_hang || data.data)) || [];
+        status.classList.add("hidden");
+        if (!rows.length) { empty.classList.remove("hidden"); return; }
+        rows.slice(0, 5).forEach(function (row, i) {
+          var tr = document.createElement("tr");
+          var ten = row.ten_dang_nhap || row.ten || row.nguoi_choi || "Người chơi ẩn danh";
+          var thoiGian = row.thoi_gian_hoan_thanh !== undefined ? row.thoi_gian_hoan_thanh : row.thoi_gian;
+          var ngay = row.ngay_hoan_thanh || row.ngay_tao || row.created_at;
+          var soGoiY = row.so_goi_y_da_dung !== undefined ? row.so_goi_y_da_dung : (row.so_goi_y || "-");
+          tr.innerHTML = "<td>" + (i + 1) + "</td><td>" + esc(ten) + "</td><td>" + fmtTime(thoiGian) + "</td><td>" + esc(String(soGoiY)) + "</td><td>" + esc(fmtDate(ngay)) + "</td>";
+          body.appendChild(tr);
+        });
+      }).catch(function () {
+        status.textContent = "Chưa tải được bảng xếp hạng vì backend chưa chạy. Hãy thử lại sau.";
+      });
+    });
+  </script>
+  <script>
+    /* Danh sách chương: lấy từ backend, nếu backend chưa chạy thì giữ bản cứng hiện có. */
+    document.addEventListener("DOMContentLoaded", function () {
+      var grid = document.getElementById("chapterGrid");
+      if (!grid) return;
+      function esc(s) {
+        return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+      }
+      QD.getChapters().then(function (data) {
+        var rows = (data && (data.chapters || data.rows || data.data)) || [];
+        if (!rows.length) return;
+        rows.sort(function (a, b) {
+          return (a.thu_tu || a.ma_chuong || 0) - (b.thu_tu || b.ma_chuong || 0);
+        });
+        grid.innerHTML = "";
+        rows.forEach(function (ch) {
+          var ma = ch.ma_chuong || ch.thu_tu || 0;
+          var ten = ch.ten_chuong || ch.ten || ("Chương " + ma);
+          var moTa = ch.mo_ta || "";
+          var playable = ma === 1;
+          var card = document.createElement("article");
+          card.className = "card" + (playable ? " current" : " locked");
+          var num = ("0" + ma).slice(-2);
+          card.innerHTML =
+            '<p class="meta">' + (playable ? "Chương " + ma + ", chơi được" : "Chương " + ma + ", sắp mở") + "</p>" +
+            '<h3><span class="no">' + num + "</span>" + esc(ten) + "</h3>" +
+            "<p>" + esc(moTa) + "</p>" +
+            (playable ? '<p><a class="btn small" href="game.html">Vào chơi</a></p>' : "");
+          grid.appendChild(card);
+        });
+      }).catch(function () { /* giữ bản cứng khi backend chưa chạy */ });
+    });
+  </script>
+</body>
+</html>

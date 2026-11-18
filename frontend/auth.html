@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Đăng nhập / Đăng ký, Quạ Đen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topnav">
+    <div class="wrap">
+      <a class="brand" href="index.html"><span class="crow">&#10022;</span> QUẠ ĐEN <small>Sài Gòn 1998</small></a>
+      <a class="navlink" href="index.html">Trang chủ</a>
+      <a class="navlink" href="game.html">Chơi game</a>
+      <a class="navlink" href="leaderboard.html">Bảng xếp hạng</a>
+      <span class="nav-user hidden" id="navUser"></span>
+      <a class="navlink hidden" id="navLogout" href="#" onclick="return false;">Đăng xuất</a>
+      <a class="navlink" id="navLogin" href="auth.html">Đăng nhập</a>
+      <a class="btn small" id="navRegister" href="auth.html#dang-ky">Đăng ký</a>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="wrap form-card">
+      <div class="card">
+        <h2>Đăng nhập</h2>
+        <p class="muted">Đăng nhập để lưu tiến trình chơi và ghi tên lên bảng xếp hạng.</p>
+        <form id="loginForm" novalidate>
+          <label for="loginName">Tên đăng nhập</label>
+          <input type="text" id="loginName" name="ten_dang_nhap" autocomplete="username" required />
+          <label for="loginPass">Mật khẩu</label>
+          <input type="password" id="loginPass" name="mat_khau" autocomplete="current-password" required />
+          <button class="btn" type="submit">Đăng nhập</button>
+          <p class="msg hidden" id="loginMsg" role="status"></p>
+        </form>
+        <p class="form-switch">Chưa có tài khoản? <a href="#dang-ky">Tạo tài khoản mới ở bên dưới</a>.</p>
+      </div>
+
+      <div class="card" id="dang-ky" style="margin-top:18px;">
+        <h2>Đăng ký</h2>
+        <p class="muted">Một tài khoản dùng cho cả 6 chương. Mật khẩu ít nhất 6 ký tự.</p>
+        <form id="registerForm" novalidate>
+          <label for="regName">Tên đăng nhập</label>
+          <input type="text" id="regName" name="ten_dang_nhap" autocomplete="username" required />
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="email" autocomplete="email" required />
+          <label for="regPass">Mật khẩu</label>
+          <input type="password" id="regPass" name="mat_khau" autocomplete="new-password" required />
+          <label for="regPass2">Nhập lại mật khẩu</label>
+          <input type="password" id="regPass2" name="mat_khau_nhap_lai" autocomplete="new-password" required />
+          <button class="btn" type="submit">Tạo tài khoản</button>
+          <p class="msg hidden" id="regMsg" role="status"></p>
+        </form>
+        <p class="form-switch"><a href="game.html">Chơi ngay không cần tài khoản</a> (sẽ không lưu được tiến trình).</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <b>QUẠ ĐEN, Sáu Vụ Án Sài Gòn 1998</b><br />
+      Nhóm 5, môn Lập trình website, GVHD: ThS. Trần Thịnh Mạnh Đức
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
