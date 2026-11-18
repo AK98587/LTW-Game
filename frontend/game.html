@@ -187,17 +187,43 @@
         width:38px; height:38px; font-size:1.05rem; color:var(--ink); min-height:38px;
       }
 
-      /* bolt groove + riddle */
-      .bolt-wrap{ margin:10px auto; max-width:300px; }
-      .bolt-svg{ width:100%; height:auto; display:block; }
-      .riddle-input{
-        width:100%; max-width:340px; margin:12px auto 0; display:block;
-        font-family:inherit; font-size:1rem; padding:10px 14px; border-radius:9px;
-        border:1.5px solid var(--line); background:var(--slot); color:var(--ink);
+      /* clock puzzle */
+      .clockface{ width:190px; height:190px; margin:10px auto; position:relative; }
+      .steppers{ display:flex; gap:14px; justify-content:center; margin-top:8px; flex-wrap:wrap; }
+      .stepper{ display:flex; align-items:center; gap:8px; }
+      .stepper button{ width:40px; height:40px; border-radius:8px; border:1px solid var(--line); background:var(--slot); font-size:1.15rem; font-weight:700; color:var(--ink); }
+      .stepper .val{ font-family:"Playfair Display",serif; font-size:1.5rem; min-width:64px; }
+      .stepper .lab{ font-size:.72rem; color:var(--ink-soft); font-weight:700; letter-spacing:.1em; }
+
+      /* safe keypad */
+      .safe-display{
+        font-family:"Playfair Display",serif; font-size:2rem; letter-spacing:.5em; text-indent:.5em;
+        background:var(--slot); border:1px solid var(--line); border-radius:10px; padding:8px 0; margin:12px auto; max-width:260px; min-height:60px;
       }
-      .riddle-input:focus{ outline:none; border-color:var(--accent); }
+      .pad{ display:grid; grid-template-columns:repeat(3,64px); gap:8px; justify-content:center; margin-top:6px; }
+      .pad button{ height:52px; border-radius:10px; border:1px solid var(--line); background:var(--slot); font-size:1.2rem; font-weight:700; color:var(--ink); }
+      .pad button:hover{ border-color:var(--accent); color:var(--accent); }
+      .pad .wide{ grid-column:span 1; font-size:.85rem; }
+
+      /* symbol panel */
+      .symrow{ display:flex; gap:10px; justify-content:center; margin:14px 0 6px; flex-wrap:wrap; }
+      .symbtn{
+        width:72px; height:72px; border-radius:12px; border:1.5px solid var(--line);
+        background:var(--slot); display:flex; align-items:center; justify-content:center; min-height:72px;
+      }
+      .symbtn:hover{ border-color:var(--accent); }
+      .symbtn svg{ width:44px; height:44px; }
+      .dots{ display:flex; gap:8px; justify-content:center; margin-top:10px; }
+      .dots i{ width:12px; height:12px; border-radius:50%; border:1.5px solid var(--slot-line); display:block; }
+      .dots i.on{ background:var(--accent); border-color:var(--accent); }
       .shake{ animation:shake .4s; }
       @keyframes shake{ 0%,100%{transform:translateX(0)} 25%{transform:translateX(-7px)} 75%{transform:translateX(7px)} }
+
+      .mirror-syms{ display:flex; gap:14px; justify-content:center; align-items:center; margin:14px 0; flex-wrap:wrap; }
+      .mirror-syms svg{ width:46px; height:46px; }
+      .mirror-syms .arr{ color:var(--ink-soft); font-size:1.2rem; }
+      .radio-line{ font-family:"Playfair Display",serif; font-style:italic; font-size:1.15rem; min-height:1.6em; }
+      .static-noise{ letter-spacing:.3em; color:var(--ink-soft); }
 
       .end-stats{ display:flex; gap:10px; justify-content:center; margin:14px 0 4px; flex-wrap:wrap; }
       .end-stats .st{ background:var(--slot); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }
@@ -293,6 +319,12 @@
               <line x1="145" y1="68" x2="145" y2="302" stroke="#3a2e20" stroke-width="7"/>
               <line x1="58" y1="176" x2="232" y2="176" stroke="#3a2e20" stroke-width="7"/>
               <rect x="50" y="298" width="190" height="12" fill="#3a2e20"/>
+              <g id="crowA" style="display:none">
+                <path d="M96 296 q-4-20 8-30 q4-12 16-13 q13-1 17 10 q12 4 10 18 q-1 10-10 15 Z" fill="#101216"/>
+                <path d="M137 262 l16 4-15 6z" fill="#101216"/>
+                <circle cx="128" cy="262" r="2.6" fill="#e8e2c8"/>
+                <path d="M104 296 l-3 8M124 296 l2 8" stroke="#101216" stroke-width="3"/>
+              </g>
             </g>
             <!-- painting -->
             <g>
@@ -320,28 +352,16 @@
               <circle cx="341" cy="330" r="15" fill="#c8a75a"/>
               <rect id="clockDrawer" x="312" y="392" width="58" height="34" rx="3" fill="#4a3121" stroke="#c8a75a" stroke-width="0"/>
             </g>
-            <!-- wardrobe -->
-            <g id="wardA">
-              <rect x="400" y="58" width="150" height="272" rx="6" fill="#54382a"/>
-              <rect x="410" y="70" width="64" height="248" fill="#63452f"/>
-              <rect x="478" y="70" width="64" height="248" fill="#63452f"/>
-              <rect x="400" y="58" width="150" height="14" rx="4" fill="#3c281a"/>
-              <circle cx="468" cy="196" r="5" fill="#c8a75a"/><circle cx="482" cy="196" r="5" fill="#c8a75a"/>
-            </g>
-            <!-- bed -->
+            <!-- sofa -->
             <g>
-              <rect x="56" y="306" width="240" height="26" rx="8" fill="#54382a"/>
-              <rect x="64" y="340" width="360" height="100" rx="10" fill="#ddd3b8"/>
-              <path d="M64 388 h360 v42 a10 10 0 0 1-10 10 H74 a10 10 0 0 1-10-10z" fill="#54687a"/>
-              <rect x="72" y="352" width="150" height="44" rx="12" fill="#ece4cb"/>
-              <rect x="72" y="352" width="150" height="44" rx="12" fill="none" stroke="#c9bfa0" stroke-width="3"/>
-              <rect x="64" y="440" width="360" height="12" fill="#4a3121"/>
-              <rect x="76" y="452" width="14" height="34" fill="#3c281a"/><rect x="398" y="452" width="14" height="34" fill="#3c281a"/>
-              <g id="tinBoxArt">
-                <rect x="210" y="446" width="66" height="24" rx="4" fill="#7d8894"/>
-                <rect x="210" y="446" width="66" height="7" fill="#67727e"/>
-                <circle cx="243" cy="458" r="3" fill="#454f58"/>
-              </g>
+              <rect x="92" y="352" width="346" height="118" rx="16" fill="#744636"/>
+              <rect x="106" y="330" width="318" height="58" rx="14" fill="#82503c"/>
+              <rect x="118" y="382" width="140" height="58" rx="10" fill="#8a5741"/>
+              <rect x="270" y="382" width="140" height="58" rx="10" fill="#8a5741"/>
+              <rect x="120" y="384" width="136" height="10" rx="5" fill="#96644c"/>
+              <rect x="84" y="392" width="30" height="66" rx="12" fill="#6b3d2d"/>
+              <rect x="416" y="392" width="30" height="66" rx="12" fill="#6b3d2d"/>
+              <rect x="100" y="466" width="330" height="14" fill="#5d3423"/>
             </g>
             <!-- rug -->
             <g>
@@ -365,14 +385,21 @@
               <rect x="652" y="318" width="16" height="24" rx="2" fill="#2c2013"/>
               <g id="doorGlow" style="display:none"><rect x="642" y="150" width="116" height="372" fill="#ffe9a8" opacity="0.14"/></g>
             </g>
+            <!-- symbol panel -->
+            <g>
+              <rect x="596" y="278" width="40" height="74" rx="5" fill="#2c2620"/>
+              <circle cx="616" cy="296" r="6" fill="#57503e"/>
+              <circle cx="616" cy="316" r="6" fill="#57503e"/>
+              <circle cx="616" cy="336" r="6" fill="#57503e"/>
+            </g>
           </svg>
           <button class="hotspot" data-act="window" style="left:7.25%;top:11.3%;width:21.75%;height:39%" aria-label="Cửa sổ"></button>
           <button class="hotspot" data-act="painting" style="left:69.75%;top:9.7%;width:18%;height:22.3%" aria-label="Bức tranh con quạ"></button>
           <button class="hotspot" data-act="clock" style="left:37.25%;top:9.7%;width:10.5%;height:69%" aria-label="Đồng hồ đứng"></button>
-          <button class="hotspot" data-act="wardrobe" style="left:50%;top:9.7%;width:18.75%;height:45%" aria-label="Tủ áo gỗ"></button>
-          <button class="hotspot" data-act="tinbox" style="left:10.5%;top:72%;width:37%;height:9%" aria-label="Gầm giường, hộp thiếc"></button>
-          <button class="hotspot" data-act="rug" style="left:20%;top:84%;width:42%;height:10%" aria-label="Tấm thảm"></button>
+          <button class="hotspot" data-act="cushion" style="left:15%;top:57.5%;width:18.1%;height:12.5%" aria-label="Gối sofa"></button>
+          <button class="hotspot" data-act="rug" style="left:20%;top:82%;width:42%;height:12%" aria-label="Tấm thảm"></button>
           <button class="hotspot" data-act="plant" style="left:58.5%;top:52%;width:9.25%;height:27%" aria-label="Chậu cây"></button>
+          <button class="hotspot" data-act="panel" style="left:73.5%;top:45%;width:6.5%;height:14%" aria-label="Bảng nút bên cửa"></button>
           <button class="hotspot" data-act="door" style="left:79.75%;top:24.7%;width:15.5%;height:62.3%" aria-label="Cửa chính"></button>
         </div>
 
@@ -414,8 +441,16 @@
               <ellipse cx="320" cy="152" rx="56" ry="64" fill="none" stroke="#4a3a28" stroke-width="8"/>
               <ellipse cx="320" cy="152" rx="44" ry="52" fill="#aebfc0" opacity="0.55"/>
               <path d="M292 196 Q320 120 356 108" stroke="#d7e2e2" stroke-width="6" fill="none" opacity="0.5"/>
+              <g id="mirrorSyms" style="display:none"></g>
               <!-- candle holder -->
               <rect x="398" y="228" width="22" height="10" rx="2" fill="#8a6d3b"/>
+              <g id="candleB" style="display:none">
+                <rect x="404" y="196" width="10" height="34" rx="2" fill="#e6ddc2"/>
+                <g id="flameB" style="display:none">
+                  <path d="M409 178 q7 10 0 18 q-7-8 0-18z" fill="#f2a541"/>
+                  <path d="M409 186 q3.4 5 0 9 q-3.4-4 0-9z" fill="#ffd98a"/>
+                </g>
+              </g>
             </g>
             <!-- bed -->
             <g>
@@ -447,13 +482,28 @@
               <rect x="698" y="70" width="64" height="390" fill="#63452f"/>
               <circle cx="686" cy="268" r="5" fill="#c8a75a"/><circle cx="704" cy="268" r="5" fill="#c8a75a"/>
             </g>
+            <g id="wardOpen" style="display:none">
+              <rect x="618" y="58" width="154" height="414" fill="#54382a"/>
+              <rect x="628" y="70" width="134" height="390" fill="#241a10"/>
+              <rect x="628" y="180" width="134" height="8" fill="#4a3121"/>
+              <rect x="628" y="300" width="134" height="8" fill="#4a3121"/>
+              <path d="M648 96 q10 40-2 76 M690 96 q-8 40 0 76 M728 96 q8 40 0 76" stroke="#3d4a55" stroke-width="12" fill="none"/>
+              <g id="tinB">
+                <rect x="662" y="238" width="66" height="44" rx="4" fill="#7d8894"/>
+                <rect x="662" y="238" width="66" height="10" fill="#67727e"/>
+                <circle cx="670" cy="266" r="3" fill="#454f58"/><circle cx="720" cy="266" r="3" fill="#454f58"/>
+                <circle cx="670" cy="246" r="3" fill="#454f58"/><circle cx="720" cy="246" r="3" fill="#454f58"/>
+              </g>
+              <rect x="646" y="330" width="44" height="30" fill="#71606a"/><rect x="700" y="330" width="44" height="30" fill="#5d6d66"/>
+            </g>
           </svg>
           <button class="hotspot" data-act="bwindow" style="left:7.5%;top:11.7%;width:15%;height:25%" aria-label="Cửa sổ hành lang"></button>
           <button class="hotspot" data-act="photo" style="left:58.5%;top:14.7%;width:11.75%;height:14%" aria-label="Khung ảnh cũ"></button>
           <button class="hotspot" data-act="mirror" style="left:29.75%;top:13%;width:24.25%;height:39%" aria-label="Bàn trang điểm và gương"></button>
+          <button class="hotspot" data-act="pillow" style="left:8.75%;top:52%;width:19.5%;height:9%" aria-label="Gối trên giường"></button>
           <button class="hotspot" data-act="bed" style="left:8%;top:60%;width:45%;height:24%" aria-label="Giường ngủ"></button>
           <button class="hotspot" data-act="chest" style="left:58.5%;top:64%;width:21.75%;height:19.3%" aria-label="Rương gỗ"></button>
-          <button class="hotspot" data-act="wardrobeB" style="left:77.25%;top:9.7%;width:19.25%;height:69%" aria-label="Tủ quần áo"></button>
+          <button class="hotspot" data-act="wardrobe" style="left:77.25%;top:9.7%;width:19.25%;height:69%" aria-label="Tủ quần áo"></button>
         </div>
 
         <!-- ============ ROOM C : BẾP ============ -->
@@ -503,6 +553,13 @@
                 <circle cx="628" cy="88" r="3.4" fill="#39423c"/><circle cx="732" cy="88" r="3.4" fill="#39423c"/>
                 <circle cx="628" cy="162" r="3.4" fill="#39423c"/><circle cx="732" cy="162" r="3.4" fill="#39423c"/>
               </g>
+              <g id="ventOpen" style="display:none">
+                <rect x="626" y="86" width="108" height="78" fill="#14161a"/>
+                <g id="ventCandle">
+                  <rect x="668" y="118" width="24" height="42" rx="3" fill="#e6ddc2"/>
+                  <rect x="664" y="112" width="32" height="8" rx="2" fill="#c9bfa0"/>
+                </g>
+              </g>
             </g>
             <!-- hanging pans -->
             <g stroke="#3c3a34" stroke-width="4" fill="#565a54">
@@ -542,25 +599,23 @@
                 <circle cx="480" cy="274" r="4" fill="#3c281a"/><circle cx="550" cy="274" r="4" fill="#3c281a"/>
               </g>
             </g>
-            <!-- plant pot -->
-            <g id="potPlant">
-              <path d="M65 296 q-14-18-4-32 q10 8 8 26 M65 296 q0-22 12-28 q4 14-5 26 M65 296 q-18-8-28 2 q10 10 24 4" fill="#3f5d43"/>
-              <path d="M50 296 h30 l-4 32 a4 4 0 0 1-4 3 h-14 a4 4 0 0 1-4-3 Z" fill="#96603a"/>
-              <rect x="46" y="292" width="38" height="8" rx="2" fill="#7d4f2e"/>
-            </g>
-            <!-- hand mirror -->
-            <g id="handMirrorArt">
-              <ellipse cx="448" cy="302" rx="14" ry="17" fill="#93a3a8"/>
-              <ellipse cx="448" cy="302" rx="14" ry="17" fill="none" stroke="#4a3a28" stroke-width="4"/>
-              <rect x="444" y="318" width="8" height="14" rx="3" fill="#4a3a28"/>
+            <!-- safe -->
+            <g>
+              <rect x="588" y="378" width="134" height="124" rx="8" fill="#5b6066"/>
+              <rect x="600" y="390" width="110" height="100" rx="6" fill="#6a7076"/>
+              <rect x="600" y="390" width="110" height="100" rx="6" fill="none" stroke="#454a4f" stroke-width="3"/>
+              <circle cx="655" cy="428" r="17" fill="#454a4f"/>
+              <circle cx="655" cy="428" r="7" fill="#878d93"/>
+              <g stroke="#454a4f" stroke-width="5"><line x1="655" y1="452" x2="655" y2="472"/><line x1="640" y1="462" x2="670" y2="462"/></g>
+              <g id="safeGlow" style="display:none"><rect x="600" y="390" width="110" height="100" rx="6" fill="#ffe9a8" opacity="0.18"/></g>
             </g>
           </svg>
           <button class="hotspot" data-act="shelf" style="left:7%;top:11%;width:33%;height:10%" aria-label="Kệ lọ thủy tinh"></button>
+          <button class="hotspot" data-act="vent" style="left:77.25%;top:13%;width:15.5%;height:15.7%" aria-label="Ống thông gió"></button>
           <button class="hotspot" data-act="stove" style="left:10.5%;top:38%;width:19%;height:16%" aria-label="Bếp và ấm nước"></button>
           <button class="hotspot" data-act="sink" style="left:37.5%;top:48%;width:16.5%;height:14%" aria-label="Bồn rửa"></button>
           <button class="hotspot" data-act="radio" style="left:58.5%;top:43.7%;width:11.75%;height:11.7%" aria-label="Đài radio"></button>
-          <button class="hotspot" data-act="pot" style="left:4.5%;top:42%;width:7%;height:13%" aria-label="Chậu cây giấy"></button>
-          <button class="hotspot" data-act="handmirror" style="left:53.5%;top:47.5%;width:5%;height:7.8%" aria-label="Gương cầm tay"></button>
+          <button class="hotspot" data-act="safe" style="left:73.5%;top:63%;width:16.75%;height:20.7%" aria-label="Két sắt"></button>
         </div>
 
         <!-- ===== NHÂN VẬT: đi lại + cầm nắm ===== -->
@@ -607,7 +662,7 @@
 
       <div class="controls-hint">
         <span><b>Cách chơi mới:</b> Chạm vào <b>sàn nhà</b> để nhân vật đi tới đó · Chạm vào <b>đồ vật</b> thì nhân vật sẽ tự đi tới, cúi nhặt / tương tác · Chọn đồ trong túi thì nhân vật <b>cầm trên tay</b> thật</span>
-        <span><kbd>←</kbd> <kbd>→</kbd> hoặc <kbd>A</kbd> <kbd>D</kbd> để đi bộ · <kbd>E</kbd> tương tác đồ gần nhất · Đăng nhập để giải câu đố và lưu tiến trình lên máy chủ</span>
+        <span><kbd>←</kbd> <kbd>→</kbd> hoặc <kbd>A</kbd> <kbd>D</kbd> để đi bộ · <kbd>E</kbd> tương tác đồ gần nhất</span>
       </div>
 
       <div class="dialogue"><span id="dialogueText">…</span></div>
@@ -620,7 +675,7 @@
         <div class="save-hint">Bấm Lưu game để lưu tiến trình Chương 1 lên máy chủ (cần đăng nhập). Bấm Tải game để tiếp tục lần chơi trước.</div>
       </div>
 
-      <p class="footer-note">Quạ Đen, Chương 1, bản demo cho đồ án Lập trình Web, Nhóm 5. Chuỗi câu đố đúng kịch bản: chốt cửa rãnh chữ L, hộp thiếc với móc áo, chậu cây giấy, câu đố cuối ở cửa phòng. Đáp án kiểm tra trên máy chủ PHP + MySQL, không nằm ở front-end.</p>
+      <p class="footer-note">Quạ Đen, Chương 1, bản demo cho đồ án Lập trình Web, Nhóm 5. Game thuần HTML / CSS / JS, nhân vật đi bộ trong phòng, tự đi tới đồ vật, cúi xuống nhặt đồ và cầm vật trên tay khi bạn chọn dùng. Đăng nhập để lưu tiến trình lên máy chủ.</p>
     </div>
 
     <!-- intro -->
@@ -629,7 +684,7 @@
         <h2>Quạ Đen</h2>
         <p class="sub">Chương 1: Căn phòng khóa trái ở hẻm 41</p>
         <p>Sáng 10/03/1998. Bạn là Đặng Minh An, sinh viên báo chí, vừa tới nhà trọ Sáu Lành ở hẻm 41, quận 5 để tìm chú Bảo. Phòng trọ số 4 khóa trái từ bên trong. Trong phòng, chú giấu Trang sổ số 1, trang đầu tiên trong 6 trang sổ ghi số cân thật.</p>
-        <p class="sub"><b>Nhân vật của bạn đi lại được thật:</b> chạm vào sàn để đi tới, chạm vào đồ vật để nhân vật tự bước tới nhặt / mở / dùng đồ. Đồ được chọn trong túi sẽ hiện trên tay nhân vật. Đăng nhập để giải câu đố, đáp án được kiểm tra trên máy chủ.</p>
+        <p class="sub"><b>Nhân vật của bạn đi lại được thật:</b> chạm vào sàn để đi tới, chạm vào đồ vật để nhân vật tự bước tới nhặt / mở / dùng đồ. Đồ được chọn trong túi sẽ hiện trên tay nhân vật.</p>
         <button class="btn" id="btnStart" type="button">Bước vào phòng trọ</button>
       </div>
     </div>
@@ -648,7 +703,7 @@
         <div class="end-stats">
           <div class="st"><b id="endTime">0:00</b><span>Thời gian</span></div>
           <div class="st"><b id="endHints">0</b><span>Gợi ý đã dùng</span></div>
-          <div class="st"><b id="endSolved">0 / 4</b><span>Câu đố đã giải</span></div>
+          <div class="st"><b>11</b><span>Câu đố đã giải</span></div>
         </div>
         <button class="btn" id="btnAgain" type="button">Chơi lại từ đầu</button>
       </div>
@@ -662,57 +717,50 @@
     <script>
     (function(){
       "use strict";
-      /* ================= DỮ LIỆU CANON CHƯƠNG 1 =================
-         Lấy đúng từ backend/db/seed.sql và schema.sql. Ở đây chỉ có
-         tên, mô tả và gợi ý. KHÔNG có đáp án. Đáp án chỉ nằm trong DB
-         và chỉ được kiểm tra ở back-end qua action solve.
-         8 câu đố Chương 1 trong DB, 4 câu chơi được ở bản demo này
-         (1, 2, 4, 8) vì 4 câu còn lại (3, 5, 6, 7) chưa có đáp án
-         trong dữ liệu mẫu. Câu 3, 6, 7 vẫn xuất hiện để xem. */
-      var CHUONG_ID = 1;
-      var VAT_PHAM_IDS = { hook: 9, dongkey: 1, page1: 2 };
-      var VAT_PHAM_TO_ITEM = { 9: "hook", 1: "dongkey", 2: "page1" };
+      /* ================= ICONS ================= */
       var ICONS = {
-        hook: '<svg viewBox="0 0 48 48" fill="none" stroke="#7a4a2e" stroke-width="3.4" stroke-linecap="round"><path d="M30 6 v20 a9 9 0 1 1 -18 0"/><line x1="30" y1="6" x2="30" y2="12"/></svg>',
-        dongkey: '<svg viewBox="0 0 48 48" fill="none" stroke="#a8802f" stroke-width="3.4" stroke-linecap="round"><circle cx="15" cy="15" r="8"/><line x1="21" y1="21" x2="40" y2="40"/><line x1="33" y1="33" x2="39" y2="27"/><line x1="38" y1="38" x2="43" y2="32"/></svg>',
-        page1: '<svg viewBox="0 0 48 48" fill="none"><rect x="10" y="6" width="28" height="36" rx="3" fill="#efe6cc" stroke="#8a6d3b" stroke-width="2.4"/><line x1="16" y1="15" x2="32" y2="15" stroke="#4c4436" stroke-width="2.4"/><line x1="16" y1="22" x2="32" y2="22" stroke="#4c4436" stroke-width="2.4"/><line x1="16" y1="29" x2="28" y2="29" stroke="#4c4436" stroke-width="2.4"/><path d="M30 34 q-1-6 3-8 q1-4 5-4 q4 0 5 3 q3 1 3 5 q0 3-3 4 l1 3-2 1-2-3-5 1-1 3-2-1z" fill="#22242a"/></svg>'
+        scissors: '<svg viewBox="0 0 48 48" fill="none" stroke="#7a4a2e" stroke-width="3" stroke-linecap="round"><circle cx="13" cy="35" r="6"/><circle cx="13" cy="13" r="6"/><line x1="18" y1="17" x2="40" y2="38"/><line x1="18" y1="31" x2="40" y2="10"/></svg>',
+        screwdriver: '<svg viewBox="0 0 48 48" fill="none" stroke-linecap="round"><rect x="6" y="30" width="16" height="10" rx="4" fill="#8a3324"/><line x1="21" y1="35" x2="38" y2="18" stroke="#7d8894" stroke-width="5"/><line x1="38" y1="18" x2="43" y2="13" stroke="#7d8894" stroke-width="3"/></svg>',
+        smallkey: '<svg viewBox="0 0 48 48" fill="none" stroke="#a8802f" stroke-width="3.4" stroke-linecap="round"><circle cx="15" cy="15" r="8"/><line x1="21" y1="21" x2="40" y2="40"/><line x1="33" y1="33" x2="39" y2="27"/><line x1="38" y1="38" x2="43" y2="32"/></svg>',
+        battery: '<svg viewBox="0 0 48 48" fill="none"><rect x="7" y="15" width="32" height="18" rx="3" stroke="#5c554a" stroke-width="3"/><rect x="39" y="21" width="5" height="6" fill="#5c554a"/><path d="M25 19 L19 26 h5 L22 31 L30 23 h-5 L27 19z" fill="#c9862f"/></svg>',
+        matches: '<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="24" width="32" height="15" rx="2" fill="#b08a4f" stroke="#7a5a2e" stroke-width="2.4"/><line x1="14" y1="24" x2="20" y2="8" stroke="#c9a86a" stroke-width="3.4" stroke-linecap="round"/><circle cx="20.5" cy="7.5" r="3.4" fill="#8a3324"/><line x1="26" y1="24" x2="30" y2="10" stroke="#c9a86a" stroke-width="3.4" stroke-linecap="round"/><circle cx="30.5" cy="9.5" r="3.4" fill="#8a3324"/></svg>',
+        candle: '<svg viewBox="0 0 48 48" fill="none"><rect x="18" y="20" width="12" height="20" rx="2" fill="#e6ddc2" stroke="#b3a678" stroke-width="2.2"/><path d="M24 7 q5 6 0 12 q-5-6 0-12z" fill="#f2a541"/></svg>',
+        ironkey: '<svg viewBox="0 0 48 48" fill="none" stroke="#3f3a33" stroke-width="3.6" stroke-linecap="round"><circle cx="14" cy="14" r="8.5"/><line x1="20" y1="20" x2="41" y2="41"/><line x1="32" y1="32" x2="39" y2="25"/><line x1="37" y1="37" x2="44" y2="30"/></svg>'
       };
-      var ITEM_NAMES = { hook: "Móc áo uốn cong", dongkey: "Chìa đồng", page1: "Trang sổ số 1" };
+      var ITEM_NAMES = { scissors:"Kéo rỉ", screwdriver:"Tua vít", smallkey:"Chìa khóa nhỏ", battery:"Pin", matches:"Hộp diêm", candle:"Nến trắng", ironkey:"Chìa khóa sắt" };
       var ITEM_DESC = {
-        hook: "Móc áo sắt uốn cong, luồn được xuống gầm giường.",
-        dongkey: "Chìa đồng nhặt từ chậu cây giấy ở sân thượng phơi đồ.",
-        page1: "Trang sổ tay chép số cân thật chuyến 19/01: 226 kg."
+        scissors:"Một cây kéo cũ, lưỡi vẫn còn sắc.",
+        screwdriver:"Tua vít dẹt, cán gỗ đã mòn.",
+        smallkey:"Chìa khóa đồng nhỏ, vừa với một ổ khóa tủ.",
+        battery:"Một viên pin lớn, còn đầy.",
+        matches:"Hộp diêm còn gần đầy que.",
+        candle:"Một cây nến trắng chưa cháy, giấu trong ống thông gió.",
+        ironkey:"Chìa khóa sắt nặng, chắc chắn là của cửa chính."
       };
-      var PUZZLES = {
-        1: { name: "Chốt cửa gài theo rãnh chữ L",
-             moTa: "Chốt cửa gài theo rãnh chữ L, kéo chốt men theo rãnh mới mở được cửa.",
-             hint: "Rãnh chữ L chỉ có một đường đi duy nhất, kéo chốt men theo rãnh." },
-        2: { name: "Hộp thiếc dưới gầm giường",
-             moTa: "Hộp thiếc nằm sâu dưới gầm giường, tay không với tới.",
-             hint: "Cần thứ gì dài và cong để luồn xuống gầm giường.",
-             need: "hook" },
-        4: { name: "Chậu cây giấy xoay theo vết xước",
-             moTa: "Chậu cây giấy xoay được theo vết xước trên thành chậu.",
-             hint: "Xoay chậu cây theo vết xước, bên dưới có chìa đồng." },
-        8: { name: "Nơi đợi người lạ qua cửa phòng",
-             moTa: "Nơi đợi người lạ qua cửa phòng.",
-             hint: "Câu đố cuối hỏi đúng cụm từ trong câu hỏi, hãy gõ lại cụm từ đó." }
+      var SYMS = {
+        eye: '<svg viewBox="0 0 48 48" fill="none" stroke="#4c4436" stroke-width="3"><path d="M4 24 Q24 6 44 24 Q24 42 4 24Z"/><circle cx="24" cy="24" r="7" fill="#4c4436"/></svg>',
+        fish: '<svg viewBox="0 0 48 48" fill="none" stroke="#4c4436" stroke-width="3"><path d="M6 24 Q20 10 34 24 Q20 38 6 24Z"/><path d="M34 24 L44 15 V33 Z"/><circle cx="15" cy="22" r="2.4" fill="#4c4436"/></svg>',
+        moon: '<svg viewBox="0 0 48 48" fill="#4c4436"><path d="M32 5 A19 19 0 1 0 43 34 A15 15 0 0 1 32 5Z"/></svg>',
+        crow: '<svg viewBox="0 0 48 48" fill="#22242a"><path d="M10 34 q-2-12 6-18 q2-7 10-8 q8 0 10 6 q7 2 6 10 q0 6-6 9 l3 7-5 1-3-6-11 1-2 6-5-1z"/><path d="M36 13 l8 2-7 4z"/><circle cx="31" cy="14" r="1.8" fill="#e8e2c8"/></svg>'
       };
-      var ROOMS = ["A", "B", "C"];
-      var ROOM_NAMES = { A: "Phòng trọ số 4", B: "Hành lang và cầu thang", C: "Sân thượng phơi đồ" };
-      var ROOM_TO_MA_PHONG = { A: 1, B: 2, C: 3 };
-      var MA_PHONG_TO_ROOM = { 1: "A", 2: "B", 3: "C" };
+      var SYM_ORDER = ["eye","fish","moon","crow"];
+      var SYM_NAMES = { eye:"Con mắt", fish:"Con cá", moon:"Mặt trăng", crow:"Con quạ" };
+      var SAFE_CODE = "3142";
+      var ROOMS = ["A","B","C"];
+      var ROOM_NAMES = { A:"Phòng trọ số 4", B:"Hành lang và cầu thang", C:"Sân thượng phơi đồ" };
 
       /* ================= STATE ================= */
       var S = {
-        room: "A", started: false, startTime: 0, ended: false,
-        boltOpen: false, tinOpen: false, potDone: false, riddleSolved: false,
-        hintsUsed: 0, sound: true
+        room:"A", started:false, startTime:0, ended:false,
+        scissors:false, chestOpen:false, rugLifted:false, noteRead:false,
+        clockDone:false, crowHere:false, wardOpen:false, matchesGot:false,
+        radioOn:false, codeKnown:false, safeOpen:false,
+        ventOpen:false, candleGot:false, candlePlaced:false, candleLit:false,
+        symbolsKnown:false, keyUsed:false, panelDone:false,
+        hintsUsed:0, sound:true
       };
       var inv = [];
       var selected = null;
-      var solvedIds = [];
-      var currentMaLuu = 0;
 
       /* ================= DOM ================= */
       function $(id){ return document.getElementById(id); }
@@ -722,7 +770,7 @@
       var playerEl = $("player"), heldEl = $("heldItem"), markerEl = $("clickMarker"), ringEl = $("targetRing"), shellEl = $("sceneShell");
       var playerX = 42, playerY = 93, targetX = 42, targetY = 93;
       var isWalking = false, pendingAction = null, pendingActName = null, keyDir = 0, lastFrame = 0;
-      var PICKUP_ACTS = { tinbox: 1, wardrobe: 1, pot: 1 };
+      var PICKUP_ACTS = { cushion:1, rug:1, chest:1, wardrobe:1, vent:1, clock:1, safe:1 };
       function playerScale(){ return 0.86 + Math.max(0, Math.min(1, (playerY - 84) / 13)) * 0.26; }
       function paintPlayer(){
         playerEl.style.left = playerX + "%";
@@ -860,6 +908,14 @@
       function sndError(){ tone(140,0,0.22,"sawtooth",0.06); }
       function sndUnlock(){ tone(392,0,0.1,"square",0.05); tone(587,0.1,0.14,"square",0.05); tone(880,0.22,0.3,"sine",0.07); }
       function sndBell(){ for(var i=0;i<3;i++){ tone(1046, i*0.35, 0.5, "sine", 0.09); tone(1568, i*0.35, 0.4, "sine", 0.04); } }
+      function sndStatic(){
+        if(!S.sound) return; var c = ac(); if(!c) return;
+        var len = c.sampleRate * 0.8, buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+        for(var i=0;i<len;i++) d[i] = (Math.random()*2-1) * 0.05;
+        var src = c.createBufferSource(); src.buffer = buf;
+        var gn = c.createGain(); gn.gain.value = 0.6;
+        src.connect(gn); gn.connect(c.destination); src.start();
+      }
 
       /* ================= UI HELPERS ================= */
       var typeTimer = null;
@@ -883,11 +939,6 @@
       function closeModal(){ $("closeOverlay").classList.remove("open"); }
       $("closeOverlay").addEventListener("click", function(e){ if(e.target === this) closeModal(); });
       function setObjective(t){ $("objectiveText").textContent = t; }
-      function bindClose(){
-        $("closeCard").querySelectorAll("[data-close]").forEach(function(b){
-          b.addEventListener("click", function(){ sndClick(); closeModal(); });
-        });
-      }
 
       /* ================= INVENTORY ================= */
       function has(id){ return inv.indexOf(id) >= 0; }
@@ -957,270 +1008,369 @@
         return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
       }
       function checkWin(){
-        if(S.ended || !S.boltOpen || !S.riddleSolved) return;
+        if(S.ended || !S.keyUsed || !S.panelDone) return;
         S.ended = true;
-        var doorEl = $("doorGlow"); if(doorEl) doorEl.style.display = "block";
+        $("doorGlow").style.display = "block";
         sndUnlock(); sndBell();
-        say("Chốt cửa đã mở, Trang sổ số 1 đã nằm trong tay bạn. Cánh cửa chính từ từ hé ra...");
+        say("Ổ khóa và chốt biểu tượng cùng mở. Cánh cửa chính từ từ hé ra, gió hồ thổi vào mát lạnh…");
         setTimeout(function(){
           $("endTime").textContent = fmtTime(Date.now() - S.startTime);
           $("endHints").textContent = S.hintsUsed;
-          $("endSolved").textContent = solvedIds.length + " / 4";
           $("endOverlay").classList.add("open");
         }, 1600);
       }
-      /* ================= GIẢI CÂU ĐỐ QUA BACK-END =================
-         Đáp án được kiểm tra trên máy chủ, front-end không giữ đáp án.
-         Cần đăng nhập: back-end solve yêu cầu session đăng nhập. */
-      function solvePuzzle(maCauDo, dapAn, onOk, onFail){
-        if(!window.QD){ toast("Chưa nạp được thư viện gọi API."); if(onFail) onFail(); return; }
-        if(!QD.isLoggedIn()){
-          toast("Đăng nhập để giải câu đố. Đáp án được kiểm tra trên máy chủ.");
-          if(onFail) onFail();
-          return;
-        }
-        QD.solve(maCauDo, dapAn, currentMaLuu || undefined).then(function(res){
-          var data = QD.unwrap(res) || {};
-          if(!data.correct){
-            sndError();
-            if(data.ly_do === "thieu_vat_pham"){
-              say("Còn thiếu vật phẩm cần thiết để giải câu đố này.");
-              toast("Thiếu vật phẩm cần thiết.");
-            } else {
-              toast("Chưa đúng, thử lại.");
-            }
-            if(onFail) onFail();
-            return;
-          }
-          if(solvedIds.indexOf(maCauDo) < 0) solvedIds.push(maCauDo);
-          var reward = data.thuong || null;
-          if(reward && reward.ma_vat_pham && VAT_PHAM_TO_ITEM[reward.ma_vat_pham]){
-            addItem(VAT_PHAM_TO_ITEM[reward.ma_vat_pham]);
-          }
-          sndUnlock();
-          if(onOk) onOk(reward);
-          qdSyncServerInv();
-          checkWin();
-        }).catch(function(err){
-          sndError();
-          toast("Không kiểm tra được đáp án: " + (err.message || "lỗi kết nối"));
-          if(onFail) onFail();
-        });
+
+      /* ================= CLOSE-UPS ================= */
+      var clockH = 11, clockM = 45;
+      function clockHandsSVG(){
+        var ha = (clockH % 12) * 30 + clockM * 0.5, ma = clockM * 6;
+        return '<svg viewBox="0 0 190 190" style="width:100%;height:100%">' +
+          '<circle cx="95" cy="95" r="90" fill="#e9dfc4" stroke="#3c281a" stroke-width="6"/>' +
+          '<g stroke="#3c281a" stroke-width="3">' +
+          '<line x1="95" y1="14" x2="95" y2="26"/><line x1="95" y1="164" x2="95" y2="176"/>' +
+          '<line x1="14" y1="95" x2="26" y2="95"/><line x1="164" y1="95" x2="176" y2="95"/></g>' +
+          '<line x1="95" y1="95" x2="95" y2="52" stroke="#3c281a" stroke-width="8" stroke-linecap="round" transform="rotate(' + ha + ' 95 95)"/>' +
+          '<line x1="95" y1="95" x2="95" y2="34" stroke="#8a3324" stroke-width="5" stroke-linecap="round" transform="rotate(' + ma + ' 95 95)"/>' +
+          '<circle cx="95" cy="95" r="7" fill="#3c281a"/></svg>';
       }
-      function pickupHook(){
-        if(!window.QD || !QD.isLoggedIn()){
-          addItem("hook");
-          toast("Chơi khách: móc áo chỉ lưu trên máy này. Đăng nhập để đồng bộ lên máy chủ.");
-          return;
+      function openClock(){
+        var html = '<button class="close-x" type="button" data-close>✕</button>' +
+          "<h2>Đồng hồ đứng</h2>" +
+          '<p class="sub">Kim đồng hồ đã dừng từ lâu. Bên dưới mặt số có một ngăn nhỏ bị kẹt, chỉ mở khi chuông điểm đúng giờ.</p>' +
+          '<div class="clockface" id="clockFace">' + clockHandsSVG() + "</div>" +
+          '<div class="steppers">' +
+            '<div class="stepper"><span class="lab">GIỜ</span><button type="button" id="hMinus" aria-label="Giảm giờ">−</button><span class="val" id="hVal"></span><button type="button" id="hPlus" aria-label="Tăng giờ">+</button></div>' +
+            '<div class="stepper"><span class="lab">PHÚT</span><button type="button" id="mMinus" aria-label="Giảm phút">−</button><span class="val" id="mVal"></span><button type="button" id="mPlus" aria-label="Tăng phút">+</button></div>' +
+          "</div>" +
+          '<p class="sub" id="clockMsg"></p>' +
+          '<button class="btn" type="button" id="clockTry">Vặn núm lên dây</button>';
+        openModal(html);
+        function upd(){
+          $("hVal").textContent = (clockH === 0 ? 12 : clockH);
+          $("mVal").textContent = ("0" + clockM).slice(-2);
+          $("clockFace").innerHTML = clockHandsSVG();
         }
-        QD.pickup(VAT_PHAM_IDS.hook).then(function(){
-          addItem("hook");
-          qdSyncServerInv();
-        }).catch(function(err){
-          toast("Không nhặt được móc áo: " + (err.message || "lỗi kết nối"));
+        upd();
+        $("hPlus").onclick = function(){ clockH = (clockH + 1) % 12; sndClick(); upd(); };
+        $("hMinus").onclick = function(){ clockH = (clockH + 11) % 12; sndClick(); upd(); };
+        $("mPlus").onclick = function(){ clockM = (clockM + 15) % 60; sndClick(); upd(); };
+        $("mMinus").onclick = function(){ clockM = (clockM + 45) % 60; sndClick(); upd(); };
+        $("clockTry").onclick = function(){
+          if(clockH === 6 && clockM === 30){
+            S.clockDone = true;
+            closeModal(); sndBell();
+            $("clockDrawer").setAttribute("stroke-width", "2.5");
+            if(!S.crowHere){
+              S.crowHere = true;
+              setTimeout(function(){ $("crowA").style.display = "block"; }, 1200);
+            }
+            addItem("battery");
+            setObjective("Tìm thứ dùng viên pin này: một thiết bị nào đó trong nhà đang chờ điện.");
+            say("Đồng hồ điểm sáu tiếng rưỡi, chuông ngân dài. Ngăn nhỏ dưới mặt số bật mở: một viên pin lăn ra. Ngoài cửa sổ, có tiếng vỗ cánh…");
+          } else {
+            sndError();
+            $("clockMsg").textContent = "Bạn lên dây. Kim rung lên một cái rồi lại im. Chưa đúng giờ.";
+          }
+        };
+        bindClose();
+      }
+      function openNote(){
+        var html = '<button class="close-x" type="button" data-close>✕</button>' +
+          "<h2>Mảnh giấy dưới gối</h2>" +
+          '<div style="background:#efe6cc;border:1px solid #c9bfa0;border-radius:6px;padding:18px 16px;margin:12px 0;color:#4a3f2a;font-family:\'Playfair Display\',serif;font-style:italic;line-height:1.75">' +
+          "“Đừng tin đồng hồ trên tường.<br/>Nó chỉ kêu khi chỉ đúng giờ quạ về tổ:<br/><b style='font-size:1.25rem'>6 giờ 30</b>.<br/>Nghe tiếng chuông, ngăn tủ sẽ mở.”</div>" +
+          '<p class="sub">Chữ viết tay, nét run, mực đã ngả nâu.</p>' +
+          '<button class="btn" type="button" data-close>Gấp lại</button>';
+        openModal(html); bindClose();
+      }
+      function openRadio(){
+        var html = '<button class="close-x" type="button" data-close>✕</button>' +
+          "<h2>Đài radio</h2>" +
+          '<p class="static-noise">▂▅▃▅▂ … xì xì … ▅▃▂▅</p>' +
+          '<p class="radio-line" id="radioLine">…</p>' +
+          '<p class="sub" id="radioSub"></p>' +
+          '<button class="btn ghost" type="button" id="radioReplay">Nghe lại</button>';
+        openModal(html);
+        var lines = [
+          "…đây là đài Quạ Đen…",
+          "…mã két hôm nay…",
+          "…BA… MỘT… BỐN… HAI…",
+          "…hết bản tin. Chúc may mắn, vị khách không mời…"
+        ];
+        var li = 0, lineTimer = null;
+        function play(){
+          sndStatic(); li = 0;
+          $("radioLine").textContent = "…";
+          $("radioSub").textContent = "";
+          clearInterval(lineTimer);
+          lineTimer = setInterval(function(){
+            var lineEl = $("radioLine"), subEl = $("radioSub");
+            if(!lineEl || !subEl){ clearInterval(lineTimer); return; }
+            if(li < lines.length){ lineEl.textContent = lines[li]; if(li === 2) tone(880, 0, 0.2, "sine", 0.07); li++; }
+            else {
+              clearInterval(lineTimer);
+              S.codeKnown = true;
+              subEl.textContent = "Bạn ghi nhớ: mã két sắt là 3 - 1 - 4 - 2.";
+              setObjective("Dùng mã 3-1-4-2 mở két sắt trên sân thượng.");
+            }
+          }, 1300);
+        }
+        play();
+        $("radioReplay").onclick = play;
+        bindClose();
+      }
+      var safeEntry = "";
+      function openSafe(){
+        safeEntry = "";
+        var html = '<button class="close-x" type="button" data-close>✕</button>' +
+          "<h2>Két sắt</h2>" +
+          '<p class="sub">Ổ khóa điện tử 4 số. Đèn đỏ nhấp nháy chờ mã.</p>' +
+          '<div class="safe-display" id="safeDisp">----</div>' +
+          '<div class="pad" id="safePad"></div>' +
+          '<p class="sub" id="safeMsg">' + (S.codeKnown ? "Bạn đã nghe mã trên đài: 3 - 1 - 4 - 2." : "Bạn chưa biết mã. Có lẽ ở đâu đó trong nhà có người đọc nó lên…") + "</p>";
+        openModal(html);
+        var pad = $("safePad");
+        ["1","2","3","4","5","6","7","8","9","C","0","✓"].forEach(function(k){
+          var b = document.createElement("button");
+          b.type = "button"; b.textContent = k;
+          if(k === "C" || k === "✓") b.className = "wide";
+          b.addEventListener("click", function(){
+            sndClick();
+            if(k === "C"){ safeEntry = ""; }
+            else if(k === "✓"){
+              if(safeEntry === SAFE_CODE){
+                S.safeOpen = true;
+                closeModal(); sndUnlock();
+                $("safeGlow").style.display = "block";
+                addItem("ironkey");
+                setObjective("Một lớp khóa nữa: bảng chốt 4 biểu tượng bên cửa chính. Thứ tự nằm ở hành lang.");
+                say("Két bật mở đánh “cạch”. Bên trong chỉ có một chiếc chìa khóa sắt nặng, nằm trên tấm nhung đỏ.");
+                return;
+              } else {
+                sndError();
+                $("safePad").classList.remove("shake"); void $("safePad").offsetWidth; $("safePad").classList.add("shake");
+                $("safeMsg").textContent = "Đèn đỏ chớp ba lần. Sai mã.";
+                safeEntry = "";
+              }
+            }
+            else if(safeEntry.length < 4){ safeEntry += k; }
+            $("safeDisp").textContent = (safeEntry + "----").slice(0, 4);
+          });
+          pad.appendChild(b);
+        });
+        bindClose();
+      }
+      var symSeq = [];
+      function openPanel(){
+        symSeq = [];
+        var btns = SYM_ORDER.map(function(k){
+          return '<button class="symbtn" type="button" data-sym="' + k + '" aria-label="' + SYM_NAMES[k] + '">' + SYMS[k] + "</button>";
+        }).join("");
+        var html = '<button class="close-x" type="button" data-close>✕</button>' +
+          "<h2>Chốt biểu tượng</h2>" +
+          '<p class="sub">Bốn nút khắc hình: con mắt, con cá, mặt trăng, con quạ. Phải bấm đúng thứ tự 4 hình thì chốt mới nhả.</p>' +
+          '<div class="symrow">' + btns + "</div>" +
+          '<div class="dots" id="symDots"><i></i><i></i><i></i><i></i></div>' +
+          '<p class="sub" id="symMsg">' + (S.symbolsKnown ? "Bạn đã thấy thứ tự trong gương hành lang." : "Bạn chưa biết thứ tự. Đâu đó trong nhà có chỗ chỉ cho bạn…") + "</p>";
+        openModal(html);
+        var card = $("closeCard");
+        card.querySelectorAll("[data-sym]").forEach(function(b){
+          b.addEventListener("click", function(){
+            if(S.panelDone) return;
+            sndClick();
+            symSeq.push(b.getAttribute("data-sym"));
+            var dots = $("symDots").children;
+            for(var i = 0; i < dots.length; i++) dots[i].className = i < symSeq.length ? "on" : "";
+            if(symSeq.length === 4){
+              var ok = symSeq.join(",") === SYM_ORDER.join(",");
+              if(ok){
+                S.panelDone = true;
+                closeModal(); sndUnlock();
+                say(S.keyUsed ? "Chốt biểu tượng nhả ra…" : "Chốt biểu tượng nhả ra, nhưng ổ khóa lớn vẫn còn khóa. Cần một chiếc chìa sắt.");
+                checkWin();
+              } else {
+                sndError();
+                card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+                $("symMsg").textContent = "Bốn nút chìm xuống rồi bật lại. Sai thứ tự.";
+                symSeq = [];
+                setTimeout(function(){ var d = $("symDots"); if(d) for(var i = 0; i < d.children.length; i++) d.children[i].className = ""; }, 350);
+              }
+            }
+          });
+        });
+        bindClose();
+      }
+      function openMirror(){
+        var inner;
+        if(S.candleLit){
+          S.symbolsKnown = true;
+          setObjective("Thứ tự chốt cửa: Mắt → Cá → Trăng → Quạ. Về phòng trọ mở cửa chính.");
+          inner = '<p class="sub">Hơi nến làm mặt gương mờ đi. Trong lớp hơi nước, bốn hình hiện ra như có ai vừa vẽ bằng ngón tay:</p>' +
+            '<div class="mirror-syms">' + SYMS.eye + '<span class="arr">→</span>' + SYMS.fish + '<span class="arr">→</span>' + SYMS.moon + '<span class="arr">→</span>' + SYMS.crow + "</div>" +
+            '<p><b>Mắt → Cá → Trăng → Quạ.</b> Bạn ghi nhớ thứ tự này.</p>';
+        } else if(S.candlePlaced){
+          inner = '<p>Mặt gương phủ bụi mờ. Cây nến đã nằm trên giá, chỉ còn thiếu lửa.</p><p class="sub">Hãy cầm hộp diêm trên tay rồi chạm lại vào bàn trang điểm.</p>';
+        } else {
+          inner = '<p>Mặt gương phủ một lớp bụi dày, soi không thấy mặt mình. Bên phải gương có một giá nến trống.</p><p class="sub">Có ánh sáng, có lẽ gương mới “nói” được.</p>';
+        }
+        openModal('<button class="close-x" type="button" data-close>✕</button><h2>Gương bàn trang điểm</h2>' + inner + '<button class="btn" type="button" data-close>Quay lại</button>');
+        bindClose();
+      }
+      function bindClose(){
+        $("closeCard").querySelectorAll("[data-close]").forEach(function(b){
+          b.addEventListener("click", function(){ sndClick(); closeModal(); });
         });
       }
 
-      /* ================= MODAL CÂU ĐỐ CANON ================= */
-      var boltStep = 0;
-      function openBolt(){
-        boltStep = 0;
-        var html = '<button class="close-x" type="button" data-close>✕</button>' +
-          "<h2>" + PUZZLES[1].name + "</h2>" +
-          "<p>" + PUZZLES[1].moTa + "</p>" +
-          '<div class="bolt-wrap"><svg viewBox="0 0 300 170" class="bolt-svg">' +
-          '<path d="M40 40 V130 H260" fill="none" stroke="#57503e" stroke-width="26" stroke-linecap="round"/>' +
-          '<path d="M40 40 V130 H260" fill="none" stroke="#c9bfa0" stroke-width="16" stroke-linecap="round"/>' +
-          '<circle id="boltKnob" cx="40" cy="40" r="17" fill="#8a3324" stroke="#5d2318" stroke-width="3"/>' +
-          "</svg>" +
-          '<p class="sub" id="boltMsg">Chốt đang ở đầu rãnh. Kéo chốt men theo rãnh chữ L: xuống dưới, rồi sang ngang.</p></div>' +
-          '<button class="btn" type="button" id="boltPull">Kéo chốt</button>' +
-          '<p class="sub">Cần đăng nhập để giải câu đố. <a href="auth.html">Mở trang đăng nhập</a>.</p>';
-        openModal(html);
-        $("boltPull").onclick = function(){
-          sndClick();
-          boltStep++;
-          var knob = $("boltKnob");
-          if(boltStep === 1){
-            if(knob){ knob.setAttribute("cx", "40"); knob.setAttribute("cy", "130"); }
-            var m1 = $("boltMsg"); if(m1) m1.textContent = "Chốt đã trượt xuống dưới. Kéo tiếp sang ngang.";
-            return;
-          }
-          solvePuzzle(1, "kéo chốt theo rãnh chữ L", function(){
-            if(knob){ knob.setAttribute("cx", "260"); knob.setAttribute("cy", "130"); }
-            S.boltOpen = true;
-            var doorEl = $("doorGlow"); if(doorEl) doorEl.style.display = "block";
-            closeModal();
-            say("Chốt trượt men theo rãnh chữ L rồi nhả ra. Cửa đã hết chốt, chỉ còn câu đố cuối ở ngưỡng cửa.");
-            setObjective("Giải câu đố cuối ở cửa phòng để lấy Trang sổ số 1.");
-          }, function(){
-            boltStep = 0;
-            if(knob){ knob.setAttribute("cx", "40"); knob.setAttribute("cy", "40"); }
-            var m2 = $("boltMsg"); if(m2) m2.textContent = "Chưa mở được chốt. Kéo lại từ đầu rãnh.";
-          });
-        };
-        bindClose();
-      }
-      function openTin(){
-        var html = '<button class="close-x" type="button" data-close>✕</button>' +
-          "<h2>" + PUZZLES[2].name + "</h2>" +
-          "<p>" + PUZZLES[2].moTa + "</p>" +
-          '<p class="sub">Móc áo đang cầm trên tay bạn. Luồn nó xuống gầm giường để kéo hộp thiếc ra.</p>' +
-          '<button class="btn" type="button" id="tinPull">Luồn móc áo xuống gầm giường</button>' +
-          '<p class="sub">Cần đăng nhập để giải câu đố. <a href="auth.html">Mở trang đăng nhập</a>.</p>';
-        openModal(html);
-        $("tinPull").onclick = function(){
-          solvePuzzle(2, "móc áo uốn cong", function(){
-            S.tinOpen = true;
-            closeModal();
-            say("Hộp thiếc bật mở. Bên trong trống không, chỉ còn một mảnh giấy ghi: " + PUZZLES[4].hint);
-            setObjective("Lên sân thượng phơi đồ, xoay chậu cây giấy theo vết xước.");
-          });
-        };
-        bindClose();
-      }
-      function openPot(){
-        var html = '<button class="close-x" type="button" data-close>✕</button>' +
-          "<h2>" + PUZZLES[4].name + "</h2>" +
-          "<p>" + PUZZLES[4].moTa + "</p>" +
-          '<button class="btn" type="button" id="potTurn">Xoay chậu cây theo vết xước</button>' +
-          '<p class="sub">Cần đăng nhập để giải câu đố. <a href="auth.html">Mở trang đăng nhập</a>.</p>';
-        openModal(html);
-        $("potTurn").onclick = function(){
-          solvePuzzle(4, "xoay chậu cây", function(){
-            S.potDone = true;
-            closeModal();
-            say("Chậu cây xoay theo vết xước. Bên dưới là một chiếc chìa đồng.");
-            setObjective("Về phòng trọ, mở chốt cửa theo rãnh chữ L.");
-          });
-        };
-        bindClose();
-      }
-      function openRiddle(){
-        var html = '<button class="close-x" type="button" data-close>✕</button>' +
-          "<h2>" + PUZZLES[8].name + "</h2>" +
-          "<p>" + PUZZLES[8].moTa + "</p>" +
-          '<p class="sub">Gõ đáp án vào ô dưới rồi bấm trả lời. Đáp án được kiểm tra trên máy chủ.</p>' +
-          '<input class="riddle-input" id="riddleInput" type="text" placeholder="Gõ đáp án..." autocomplete="off" />' +
-          '<p class="sub" id="riddleMsg"></p>' +
-          '<button class="btn" type="button" id="riddleSend">Trả lời</button>' +
-          '<p class="sub">Cần đăng nhập để giải câu đố. <a href="auth.html">Mở trang đăng nhập</a>.</p>';
-        openModal(html);
-        var input = $("riddleInput");
-        if(input){
-          input.focus();
-          input.addEventListener("keydown", function(e){
-            if(e.key === "Enter"){ e.preventDefault(); var b = $("riddleSend"); if(b) b.click(); }
-          });
-        }
-        $("riddleSend").onclick = function(){
-          var val = input ? input.value : "";
-          if(!val || !val.trim()){
-            var m0 = $("riddleMsg"); if(m0) m0.textContent = "Hãy gõ đáp án trước.";
-            return;
-          }
-          solvePuzzle(8, val, function(){
-            S.riddleSolved = true;
-            closeModal();
-            say("Đúng rồi. Bạn tìm thấy Trang sổ số 1, trang đầu tiên trong 6 trang sổ của chú Bảo.");
-            setObjective("Trang sổ số 1 đã nằm trong tay bạn. Mở cửa rời khỏi phòng trọ.");
-          }, function(){
-            var m = $("riddleMsg");
-            if(m){ m.textContent = "Chưa đúng, thử lại."; m.parentElement.classList.remove("shake"); void m.parentElement.offsetWidth; m.parentElement.classList.add("shake"); }
-          });
-        };
-        bindClose();
-      }
-      function openExamine(title, body){
-        openModal('<button class="close-x" type="button" data-close>✕</button><h2>' + title + "</h2><p>" + body + '</p><button class="btn" type="button" data-close>Quay lại</button>');
-        bindClose();
-      }
-      function openWardrobe(){
-        var html = '<button class="close-x" type="button" data-close>✕</button>' +
-          "<h2>Tủ áo gỗ</h2>" +
-          "<p>Trong tủ treo mấy bộ quần áo cũ và một tờ giấy gấp theo nếp cũ. Trên móc treo còn một chiếc móc áo sắt uốn cong.</p>" +
-          '<button class="btn" type="button" id="wardTake">Lấy móc áo</button>';
-        openModal(html);
-        $("wardTake").onclick = function(){
-          pickupHook();
-          closeModal();
-          say("Bạn lấy chiếc móc áo sắt uốn cong xuống. Nó đủ dài để luồn xuống gầm giường.");
-        };
-        bindClose();
-      }
       /* ================= HOTSPOTS ================= */
-      var MODAL_ACTS = { door: 1, tinbox: 1, wardrobe: 1, pot: 1, handmirror: 1, photo: 1 };
       var ACTIONS = {
-        /* ---- Phòng trọ số 4 ---- */
-        door: function(){
-          if(S.ended) return;
-          if(!S.boltOpen){ openBolt(); return; }
-          if(!S.riddleSolved){ openRiddle(); return; }
-          checkWin();
-        },
-        tinbox: function(){
-          if(S.tinOpen){ say("Hộp thiếc đã mở, bên trong trống không."); return; }
-          if(selected === "hook"){ openTin(); return; }
-          if(has("hook")){ needSelect("hook", "Hộp thiếc nằm sâu dưới gầm giường, tay không với tới."); return; }
-          say("Hộp thiếc nằm sâu dưới gầm giường, tay không với tới. Cần thứ gì dài và cong để luồn xuống.");
-        },
-        wardrobe: function(){
-          if(has("hook")){ say("Tủ áo chỉ còn mấy bộ quần áo cũ và tờ giấy gấp theo nếp cũ."); return; }
-          openWardrobe();
-        },
-        clock: function(){
-          openExamine("Đồng hồ đứng", "Đồng hồ đứng đã dừng từ lâu, mặt số phủ một lớp bụi mỏng.");
-        },
-        painting: function(){
-          openExamine("Bức tranh con quạ", "Bức tranh vẽ một con quạ đen đậu trên cành khô. Lạ ở chỗ: dù bạn đứng ở góc nào, con mắt của nó cũng như đang nhìn theo bạn.");
-        },
-        window: function(){
-          openExamine("Cửa sổ", "Ngoài cửa sổ là con hẻm 41, mưa phùn, mái tôn và dây điện chằng chịt. Nhà đối diện tối om, không một ánh đèn.");
-        },
-        plant: function(){
-          openExamine("Chậu cây", "Chậu cây đã héo quá nửa. Đất khô nứt, nhưng có dấu ngón tay mới bới, ai đó vừa giấu gì ở đây, hoặc vừa lấy đi.");
+        /* ---- Phòng trọ ---- */
+        cushion: function(){
+          if(!S.scissors){ S.scissors = true; addItem("scissors"); say("Bạn lật chiếc gối sofa lên. Một cây kéo rỉ nằm lọt trong khe ghế, như thể ai đó cố giấu nó đi thật nhanh."); }
+          else say("Dưới gối chỉ còn một vết lõm và ít bụi vải.");
         },
         rug: function(){
-          say("Tấm thảm cũ, mép đã sờn. Dưới thảm chỉ có sàn gỗ lạnh.");
+          if(!S.rugLifted){ S.rugLifted = true; addItem("smallkey"); say("Bạn cuộn mép thảm lên. Một chiếc chìa khóa nhỏ bằng đồng rơi ra, kêu “tinh” một tiếng trên sàn gỗ."); }
+          else say("Dưới thảm là sàn gỗ lạnh và một vòng bụi hình chữ nhật.");
         },
-        /* ---- Hành lang và cầu thang ---- */
-        photo: function(){
-          openExamine("Bức ảnh gia đình", "Bức ảnh gia đình cũ, mặt kính phủ bụi. Phải soi đèn mới đọc được dòng chữ phía sau.");
+        clock: function(){
+          if(S.clockDone) say("Đồng hồ chạy đều đều: tích… tắc… tích… tắc. Ngăn nhỏ đã trống.");
+          else openClock();
         },
-        mirror: function(){
-          openExamine("Bàn trang điểm", "Tấm gương soi phủ bụi, soi không rõ mặt. Bên phải gương có một giá nến trống.");
+        painting: function(){
+          say("Bức tranh vẽ một con quạ đen đậu trên cành khô. Lạ ở chỗ: dù bạn đứng ở góc nào, con mắt của nó cũng như đang nhìn theo bạn.");
+        },
+        window: function(){
+          if(S.crowHere) say("Con quạ đứng yên trên bậu cửa, đầu nghiêng sang một bên. Nó không sợ bạn. Hình như nó đang chờ xem bạn có ra được khỏi nhà này không.");
+          else say("Ngoài cửa sổ là mặt hồ đen và mưa phùn. Bờ bên kia tối om, không một ánh đèn.");
+        },
+        plant: function(){
+          say("Chậu cây đã héo quá nửa. Đất khô nứt, nhưng có dấu ngón tay mới bới, ai đó vừa giấu gì ở đây, hoặc vừa lấy đi.");
+        },
+        panel: function(){
+          if(S.panelDone) say("Chốt biểu tượng đã nhả. " + (S.keyUsed ? "" : "Chỉ còn ổ khóa lớn."));
+          else openPanel();
+        },
+        door: function(){
+          if(S.ended) return;
+          if(selected === "ironkey" && !S.keyUsed){
+            S.keyUsed = true; removeItem("ironkey"); sndUnlock();
+            say(S.panelDone ? "Chìa khóa sắt xoay trong ổ…" : "Chìa khóa sắt vừa khít. Ổ khóa lớn mở ra, nhưng chốt biểu tượng bên cạnh vẫn đang giữ cửa.");
+            checkWin(); return;
+          }
+          if(S.keyUsed && !S.panelDone) say("Ổ khóa lớn đã mở. Chỉ còn chốt 4 biểu tượng bên trái cửa.");
+          else if(!S.keyUsed && S.panelDone) say("Chốt đã nhả. Còn ổ khóa lớn cần một chiếc chìa sắt.");
+          else say("Cửa chính khóa chặt hai lớp: một ổ khóa sắt lớn, và một bảng chốt 4 biểu tượng ở bên trái.");
+        },
+        /* ---- Hành lang ---- */
+        pillow: function(){
+          if(!S.noteRead){ S.noteRead = true; openNote(); say("Dưới gối có một mảnh giấy gấp tư, giấy đã ố vàng."); }
+          else say("Mảnh giấy ghi: đồng hồ chỉ kêu lúc 6 giờ 30, giờ quạ về tổ.");
         },
         bed: function(){
           say("Ga giường lạnh và phẳng phiu, trừ đúng một vết lõm hình người ở giữa, như thể ai đó vừa mới nằm đây.");
         },
-        chest: function(){
-          say("Một chiếc rương gỗ cũ, nắp đậy chặt.");
-        },
-        wardrobeB: function(){
-          say("Tủ quần áo ở hành lang, cửa khép hờ. Bên trong treo vài bộ quần áo.");
-        },
         bwindow: function(){
-          say("Ngoài cửa sổ hành lang là mái nhà san sát và dây điện. Xa xa, đèn đường vàng vọt trong mưa.");
+          say("Trăng lên trên mặt hồ. Xa xa có một căn chòi nhỏ, cửa sổ sáng đèn vàng, rồi tắt phụt khi bạn nhìn kỹ.");
         },
-        /* ---- Sân thượng phơi đồ ---- */
-        pot: function(){
-          if(S.potDone){ say("Chậu cây giấy đã xoay, bên dưới trống không."); return; }
-          openPot();
+        photo: function(){
+          say("Ảnh chụp căn nhà này từ bờ hồ, đề năm 1974. Trước cửa có một người đàn ông đội mũ đứng cạnh chiếc đồng hồ đứng, giống hệt cái ở phòng trọ.");
         },
-        handmirror: function(){
-          openExamine("Gương cầm tay", "Một chiếc gương cầm tay, mặt gương còn sáng. Đưa ra nắng, nó hắt được một vệt sáng vào khe tối dưới bồn nước.");
+        chest: function(){
+          if(S.chestOpen){ say("Rương trống, đáy lót rơm khô và mùi long não."); return; }
+          if(selected === "scissors"){
+            S.chestOpen = true;
+            $("ropeB").style.display = "none";
+            addItem("screwdriver");
+            say("Bạn cắt phăng sợi dây thừng. Nắp rương bật lên: bên trong có một cây tua vít cán gỗ.");
+          }
+          else if(has("scissors")) needSelect("scissors", "Dây thừng buộc rất chặt, tay không cởi nổi.");
+          else say("Một chiếc rương gỗ bị buộc chặt bằng dây thừng. Tay không thì cởi đến mai cũng không xong.");
         },
+        wardrobe: function(){
+          if(!S.wardOpen){
+            if(selected === "smallkey"){
+              S.wardOpen = true;
+              $("wardClosed").style.display = "none";
+              $("wardOpen").style.display = "block";
+              sndUnlock();
+              say("Chìa khóa nhỏ vừa ổ tủ. Hai cánh tủ mở ra: vài bộ quần áo cũ… và một hộp thiếc bị đóng chặt bằng 4 con ốc.");
+            } else if(has("smallkey")) needSelect("smallkey", "Tủ quần áo bị khóa.");
+            else say("Tủ quần áo bị khóa. Ổ khóa nhỏ bằng đồng, sáng hơn hẳn phần gỗ quanh nó.");
+            return;
+          }
+          if(!S.matchesGot){
+            if(selected === "screwdriver"){
+              S.matchesGot = true;
+              $("tinB").style.display = "none";
+              addItem("matches");
+              say("Bạn tháo từng con ốc trên hộp thiếc. Bên trong là một hộp diêm còn gần đầy, thứ duy nhất trong nhà này còn khô ráo.");
+            } else if(has("screwdriver")) needSelect("screwdriver", "Hộp thiếc trong tủ bị đóng bằng ốc vít.");
+            else say("Trong tủ có một hộp thiếc, nắp đóng bằng 4 con ốc nhỏ.");
+          } else say("Tủ chỉ còn mấy bộ quần áo len cũ, thoang thoảng mùi băng phiến.");
+        },
+        mirror: function(){
+          if(selected === "candle" && !S.candlePlaced){
+            S.candlePlaced = true; removeItem("candle");
+            $("candleB").style.display = "block";
+            sndPickup();
+            say("Bạn đặt cây nến trắng lên giá nến cạnh gương. Vừa khít như thể nó vẫn luôn thuộc về chỗ này.");
+            return;
+          }
+          if(selected === "matches" && S.candlePlaced && !S.candleLit){
+            S.candleLit = true;
+            $("flameB").style.display = "block";
+            tone(196, 0, 0.4, "sine", 0.05);
+            openMirror();
+            say("Bạn quẹt diêm. Ngọn nến cháy lên, và mặt gương bắt đầu mờ hơi nước…");
+            return;
+          }
+          if(selected === "matches" && !S.candlePlaced){ say("Châm diêm vào đâu? Giá nến cạnh gương đang trống."); return; }
+          openMirror();
+        },
+        /* ---- Sân thượng ---- */
         shelf: function(){
-          say("Hàng lọ thủy tinh đựng những thứ không còn nhận ra được.");
+          say("Hàng lọ thủy tinh đựng những thứ không còn nhận ra được. Một lọ đựng đầy… chìa khóa gỉ, nhưng nắp đã hàn chết.");
         },
         stove: function(){
-          say("Ấm nước trên bếp vẫn còn hơi ấm. Có người vừa đun nước cách đây không lâu.");
+          say("Ấm nước trên bếp vẫn còn hơi ấm. Có người vừa đun nước cách đây không lâu, trong khi bạn vẫn đang “ngủ” ở phòng trọ.");
         },
         sink: function(){
-          say("Bồn rửa bám cặn. Dưới bồn có một khe tối, hẹp tới mức không luồn tay vào được.");
+          say("Trong bồn rửa có một chiếc thìa bị uốn cong thành hình gần như một cái móc câu. Bạn quyết định không nghĩ về nó nữa.");
         },
         radio: function(){
-          say("Một chiếc đài radio cũ. Vặn núm chỉ nghe tiếng rè.");
+          if(S.radioOn){ openRadio(); return; }
+          if(selected === "battery"){
+            S.radioOn = true; removeItem("battery");
+            $("radioLight").setAttribute("fill", "#e05252");
+            openRadio();
+            say("Bạn lắp pin vào đài. Đèn đỏ sáng lên, loa rè rè…");
+          }
+          else if(has("battery")) needSelect("battery", "Đài không chạy. Khay pin phía sau đang trống.");
+          else say("Một chiếc đài radio cũ. Bạn vặn núm: không một tiếng động. Khay pin phía sau trống không.");
+        },
+        safe: function(){
+          if(S.safeOpen) say("Két sắt trống trơn, chỉ còn tấm nhung đỏ.");
+          else openSafe();
+        },
+        vent: function(){
+          if(!S.ventOpen){
+            if(selected === "screwdriver"){
+              S.ventOpen = true;
+              $("ventClosed").style.display = "none";
+              $("ventOpen").style.display = "block";
+              sndUnlock();
+              say("Bốn con ốc rơi xuống sàn. Nắp ống thông gió mở ra: bên trong tối om, có một vật màu trắng nằm sâu phía trong.");
+            } else if(has("screwdriver")) needSelect("screwdriver", "Nắp ống thông gió bị bắt vít chặt.");
+            else say("Ống thông gió trên cao, nắp đóng bằng 4 con ốc đã rỉ.");
+            return;
+          }
+          if(!S.candleGot){
+            S.candleGot = true;
+            $("ventCandle").style.display = "none";
+            addItem("candle");
+            say("Bạn thò tay vào ống, chạm phải một cây nến trắng lạnh ngắt. Ai lại giấu nến trong ống thông gió?");
+          } else say("Ống thông gió trống rỗng, chỉ có bụi và một chiếc lông vũ đen.");
         }
       };
       document.querySelectorAll(".hotspot").forEach(function(h){
@@ -1236,7 +1386,7 @@
           /* Đồ ở sát mép phải/trái thì đứng lệch vào trong một chút để không đè lên đồ */
           var standX = Math.max(9, Math.min(91, cx));
           var doAct = function(){
-            if(!MODAL_ACTS[act]) sndClick();
+            if(act !== "clock" && act !== "safe" && act !== "panel" && act !== "radio" && act !== "mirror" && act !== "pillow") sndClick();
             ACTIONS[act]();
           };
           /* Đã đứng gần rồi thì tương tác ngay, khỏi đi vòng */
@@ -1247,12 +1397,21 @@
 
       /* ================= HINTS ================= */
       function currentHint(){
-        if(!has("hook")) return "Trong phòng trọ có một tủ áo gỗ. Mở nó ra xem có gì dùng được.";
-        if(!S.tinOpen) return PUZZLES[2].hint;
-        if(!S.potDone) return PUZZLES[4].hint;
-        if(!S.boltOpen) return PUZZLES[1].hint;
-        if(!S.riddleSolved) return PUZZLES[8].hint;
-        return "Cửa đã mở, Trang sổ số 1 đã nằm trong tay bạn. Chạm vào cửa chính để rời khỏi đây.";
+        if(!S.scissors) return "Chiếc sofa ở phòng trọ trông lùm xùm bất thường. Thử lật chiếc gối lên xem.";
+        if(!S.chestOpen) return "Cây kéo cắt được dây thừng. Chiếc rương ở hành lang đang chờ.";
+        if(!S.rugLifted) return "Sàn phòng trọ có một tấm thảm. Người ta hay giấu đồ phẳng và nhỏ dưới thảm.";
+        if(!S.noteRead) return "Trên giường hành lang, thử kiểm tra dưới chiếc gối.";
+        if(!S.clockDone) return "Mảnh giấy nói đồng hồ chỉ kêu lúc 6 giờ 30. Vào phòng trọ, chạm vào đồng hồ và chỉnh kim đến 6:30 rồi lên dây.";
+        if(!S.wardOpen) return "Chiếc chìa khóa nhỏ bằng đồng vừa với tủ quần áo ở hành lang.";
+        if(!S.matchesGot) return "Trong tủ có hộp thiếc đóng bằng ốc. Cầm tua vít lên rồi chạm vào tủ lần nữa.";
+        if(!S.radioOn) return "Viên pin vừa với chiếc đài radio trên bàn trên sân thượng. Cầm pin lên rồi chạm vào đài.";
+        if(!S.safeOpen) return "Đài vừa đọc mã két: 3 - 1 - 4 - 2. Két sắt nằm ở góc sân thượng.";
+        if(!S.candleGot) return "Trên tường sân thượng có ống thông gió bắt vít. Tua vít mở được nó, và bên trong có thứ bạn cần cho hành lang.";
+        if(!S.candleLit) return "Đặt cây nến lên giá nến cạnh gương ở hành lang (cầm nến rồi chạm vào bàn trang điểm), sau đó cầm hộp diêm và chạm vào đó lần nữa để thắp.";
+        if(!S.symbolsKnown) return "Nến đã cháy. Hãy nhìn vào mặt gương trên bàn trang điểm.";
+        if(!S.keyUsed) return "Chìa khóa sắt trong két là của cửa chính ở phòng trọ. Cầm chìa lên rồi chạm vào cửa.";
+        if(!S.panelDone) return "Bảng chốt bên cửa cần thứ tự: Mắt → Cá → Trăng → Quạ.";
+        return "Cửa đã mở cả hai lớp. Chạm vào cửa chính lần nữa.";
       }
       $("btnHint").addEventListener("click", function(){
         if(!S.started) return;
@@ -1271,152 +1430,145 @@
       $("btnRestart").addEventListener("click", function(){ location.reload(); });
       $("btnAgain").addEventListener("click", function(){ location.reload(); });
       $("btnStart").addEventListener("click", function(){
-        S.started = true; if(!S._restored) S.startTime = Date.now();
+        S.started = true; if (!S._restored) S.startTime = Date.now();
         $("introOverlay").classList.remove("open");
         ac(); sndClick();
         paintPlayer();
-        say("Sáng 10/03, nhà trọ Sáu Lành, hẻm 41. Hãy chạm vào sàn để đi lại, chạm vào tủ áo gỗ gần đó, bạn sẽ tự bước tới và mở nó ra.");
-        qdEnsureSave();
+        say("Sáng 10/03, nhà trọ Sáu Lành, hẻm 41. Hãy chạm vào sàn để đi lại, chạm vào chiếc gối sofa gần đó, bạn sẽ tự bước tới và lật nó lên.");
         /* Mở đầu bằng một bước đi ngắn cho người chơi thấy nhân vật cử động được */
         setTimeout(function(){ walkTo(24, 93, null, null); }, 350);
       });
 
       /* ================= QUA DEN: LUU / TAI GAME QUA BACKEND ================= */
-      function qdSavePayload(done){
-        var elapsed = S.started ? (Date.now() - S.startTime) : 0;
-        var payload = {
-          ma_chuong: CHUONG_ID,
-          ma_phong_hien_tai: ROOM_TO_MA_PHONG[S.room] || 1,
-          thoi_gian_choi: Math.floor(elapsed / 1000),
-          so_goi_y_da_dung: S.hintsUsed,
-          da_hoan_thanh: !!done,
-          cau_do_da_giai: solvedIds.slice()
+      var ROOM_TO_MA_PHONG = { A: 1, B: 2, C: 3 };
+      function qdGetSave() {
+        var flags = {};
+        Object.keys(S).forEach(function (k) { flags[k] = S[k]; });
+        return {
+          version: 1,
+          chuong: 1,
+          room: S.room,
+          flags: flags,
+          inv: inv.slice(),
+          selected: selected,
+          hintsUsed: S.hintsUsed,
+          elapsedMs: S.started ? (Date.now() - S.startTime) : 0,
+          playerX: Math.round(playerX),
+          playerY: Math.round(playerY)
         };
-        if(currentMaLuu) payload.ma_luu = currentMaLuu;
-        return payload;
       }
-      function qdSave(done){
-        if(!window.QD || !QD.isLoggedIn()){
+      function qdApplyVisuals() {
+        if (S.crowHere) $("crowA").style.display = "block";
+        if (S.clockDone) $("clockDrawer").setAttribute("stroke-width", "2.5");
+        if (S.chestOpen) $("ropeB").style.display = "none";
+        if (S.wardOpen) { $("wardClosed").style.display = "none"; $("wardOpen").style.display = "block"; }
+        if (S.matchesGot) $("tinB").style.display = "none";
+        if (S.ventOpen) { $("ventClosed").style.display = "none"; $("ventOpen").style.display = "block"; }
+        if (S.candleGot) $("ventCandle").style.display = "none";
+        if (S.candlePlaced) $("candleB").style.display = "block";
+        if (S.candleLit) $("flameB").style.display = "block";
+        if (S.radioOn) $("radioLight").setAttribute("fill", "#e05252");
+        if (S.safeOpen) $("safeGlow").style.display = "block";
+        if (S.keyUsed && S.panelDone) $("doorGlow").style.display = "block";
+      }
+      function qdApplySave(data) {
+        if (!data) return false;
+        var st = data.state || data;
+        if (st.flags) Object.keys(st.flags).forEach(function (k) { if (k in S) S[k] = st.flags[k]; });
+        if (Array.isArray(st.inv)) inv = st.inv.filter(function (id) { return !!ITEM_NAMES[id]; });
+        selected = (st.selected && has(st.selected)) ? st.selected : null;
+        if (typeof st.playerX === "number") { playerX = st.playerX; targetX = st.playerX; }
+        if (typeof st.playerY === "number") { playerY = st.playerY; targetY = st.playerY; }
+        if (st.elapsedMs) S.startTime = Date.now() - st.elapsedMs;
+        S._restored = true;
+        if (st.room && ROOMS.indexOf(st.room) >= 0) goRoom(st.room);
+        qdApplyVisuals();
+        paintPlayer();
+        renderInv();
+        return true;
+      }
+      function qdSavePayload(done) {
+        var save = qdGetSave();
+        return {
+          ma_chuong: 1,
+          ma_phong: ROOM_TO_MA_PHONG[S.room] || 1,
+          trang_thai: JSON.stringify(save),
+          thoi_gian_choi: Math.floor(save.elapsedMs / 1000),
+          so_goi_y: S.hintsUsed,
+          da_hoan_thanh: !!done
+        };
+      }
+      function qdSave(done) {
+        if (!window.QD || !QD.isLoggedIn()) {
           toast("Đăng nhập trước khi lưu game. Bạn vẫn chơi tiếp được mà không lưu.");
           return;
         }
-        QD.saveGame(qdSavePayload(done)).then(function(res){
-          var data = QD.unwrap(res) || {};
-          if(data.ma_luu) currentMaLuu = data.ma_luu;
+        QD.saveGame(qdSavePayload(done)).then(function () {
           toast(done ? "Đã lưu: Chương 1 hoàn thành." : "Đã lưu tiến trình Chương 1 lên máy chủ.");
-          qdSyncServerInv();
-        }).catch(function(err){
+          qdRefreshServerInv();
+        }).catch(function (err) {
           toast("Lưu thất bại: " + (err.message || "lỗi kết nối"));
         });
       }
-      function qdApplyLoad(data){
-        if(!data || !data.ma_luu) return false;
-        currentMaLuu = data.ma_luu;
-        var solved = [];
-        (data.tien_do_cau_do || []).forEach(function(t){
-          if(t.da_hoan_thanh) solved.push(t.ma_cau_do);
-        });
-        solvedIds = solved;
-        S.hintsUsed = data.so_goi_y_da_dung || 0;
-        if(data.thoi_gian_choi) S.startTime = Date.now() - (data.thoi_gian_choi * 1000);
-        S._restored = true;
-        S.boltOpen = solvedIds.indexOf(1) >= 0;
-        S.tinOpen = solvedIds.indexOf(2) >= 0;
-        S.potDone = solvedIds.indexOf(4) >= 0;
-        S.riddleSolved = solvedIds.indexOf(8) >= 0;
-        if(S.boltOpen){ var d = $("doorGlow"); if(d) d.style.display = "block"; }
-        if(S.boltOpen && S.riddleSolved) setObjective("Trang sổ số 1 đã nằm trong tay bạn. Mở cửa rời khỏi phòng trọ.");
-        else if(S.potDone) setObjective("Về phòng trọ, mở chốt cửa theo rãnh chữ L, rồi giải câu đố cuối ở cửa phòng.");
-        else if(S.tinOpen) setObjective("Lên sân thượng phơi đồ, xoay chậu cây giấy theo vết xước.");
-        else if(has("hook")) setObjective("Luồn móc áo xuống gầm giường để kéo hộp thiếc ra.");
-        var room = MA_PHONG_TO_ROOM[data.ma_phong_hien_tai] || "A";
-        goRoom(room);
-        paintPlayer();
-        return true;
-      }
-      function qdLoad(){
-        if(!window.QD || !QD.isLoggedIn()){
+      function qdLoad() {
+        if (!window.QD || !QD.isLoggedIn()) {
           toast("Đăng nhập trước khi tải game đã lưu.");
           return;
         }
-        QD.loadGame(currentMaLuu || undefined).then(function(res){
-          var data = QD.unwrap(res) || null;
-          if(!data || !data.ma_luu){
+        QD.loadGame(1).then(function (data) {
+          var rec = (data && (data.luu_game || data.save || data)) || null;
+          var raw = rec && (rec.trang_thai || rec.state || rec);
+          var parsed = (typeof raw === "string") ? JSON.parse(raw) : raw;
+          if (!parsed || (!parsed.flags && !parsed.inv && !parsed.state)) {
             toast("Chưa có bản lưu Chương 1 nào trên máy chủ.");
             return;
           }
-          if(qdApplyLoad(data)){
-            qdSyncServerInv();
+          if (qdApplySave(parsed)) {
             say("Đã tải bản lưu. Tiếp tục tìm Trang sổ số 1.");
             toast("Đã tải tiến trình Chương 1.");
+            qdRefreshServerInv();
           }
-        }).catch(function(err){
+        }).catch(function (err) {
           toast("Tải thất bại: " + (err.message || "lỗi kết nối"));
         });
       }
-      /* Tạo bản lưu nếu chưa có để solve ghi được tiến độ câu đố. */
-      function qdEnsureSave(){
-        if(!window.QD || !QD.isLoggedIn() || currentMaLuu) return;
-        QD.loadGame().then(function(res){
-          var data = QD.unwrap(res) || null;
-          if(data && data.ma_luu){
-            currentMaLuu = data.ma_luu;
-            qdApplyLoad(data);
-            qdSyncServerInv();
-          }
-        }).catch(function(){
-          QD.saveGame(qdSavePayload(false)).then(function(res){
-            var data = QD.unwrap(res) || {};
-            if(data.ma_luu) currentMaLuu = data.ma_luu;
-          }).catch(function(){ /* lưu sau khi bấm nút Lưu game */ });
-        });
-      }
-      /* Đồng bộ túi đồ: từ máy chủ về túi đồ local và dòng chữ túi đồ máy chủ. */
-      function qdSyncServerInv(){
+      function qdRefreshServerInv() {
         var box = $("serverInv");
-        if(!box) return;
-        if(!window.QD || !QD.isLoggedIn()){
+        if (!box) return;
+        if (!window.QD || !QD.isLoggedIn()) {
           box.textContent = "Chưa đăng nhập: túi đồ trên máy chủ chưa đồng bộ.";
           return;
         }
-        QD.getInventory().then(function(res){
-          var items = QD.unwrap(res) || [];
-          items.forEach(function(it){
-            var id = VAT_PHAM_TO_ITEM[it.ma_vat_pham];
-            if(id && !has(id)) inv.push(id);
-          });
-          renderInv();
-          if(!items.length){ box.textContent = "Túi đồ trên máy chủ: trống."; return; }
-          var names = items.map(function(it){ return it.ten_vat_pham || ("vật phẩm " + it.ma_vat_pham); });
+        QD.getInventory().then(function (data) {
+          var items = (data && (data.items || data.vat_pham || data.rows || data.data)) || [];
+          if (!items.length) { box.textContent = "Túi đồ trên máy chủ: trống."; return; }
+          var names = items.map(function (it) { return it.ten_do_vat || it.ten || it.ma_do_vat || "?"; });
           box.textContent = "Túi đồ trên máy chủ (" + items.length + " món): " + names.join(", ") + ".";
-        }).catch(function(){
+        }).catch(function () {
           box.textContent = "Không tải được túi đồ trên máy chủ.";
         });
       }
-      /* Tu dong luu mot lan khi mo cua thang Chuong 1, ghi bang xep hang. */
+      /* Tu dong luu mot lan khi mo cua thang Chuong 1. */
       var qdWinSaved = false;
-      var endObs = new MutationObserver(function(){
-        if($("endOverlay").classList.contains("open") && !qdWinSaved){
+      var endObs = new MutationObserver(function () {
+        if ($("endOverlay").classList.contains("open") && !qdWinSaved) {
           qdWinSaved = true;
           qdSave(true);
-          if(window.QD && QD.isLoggedIn()){
-            QD.postLeaderboard(CHUONG_ID, Math.floor((Date.now() - S.startTime) / 1000)).catch(function(){});
-          }
         }
       });
       endObs.observe($("endOverlay"), { attributes: true, attributeFilter: ["class"] });
-      $("btnSave").addEventListener("click", function(){
-        if(S.started) qdSave(false);
+      $("btnSave").addEventListener("click", function () {
+        if (S.started) qdSave(false);
         else toast("Bấm Bước vào phòng trọ để bắt đầu chơi trước.");
       });
-      $("btnLoad").addEventListener("click", function(){ qdLoad(); });
-      (function qdShowUser(){
+      $("btnLoad").addEventListener("click", function () { qdLoad(); });
+      (function qdShowUser() {
         var el = $("gameUser");
-        if(!el) return;
-        if(window.QD && QD.isLoggedIn()) el.textContent = "Đã đăng nhập: " + QD.getUser();
+        if (!el) return;
+        if (window.QD && QD.isLoggedIn()) el.textContent = "Đã đăng nhập: " + QD.getUser();
         else el.textContent = "Chưa đăng nhập, chơi khách, không lưu được.";
       })();
-      qdSyncServerInv();
+      qdRefreshServerInv();
 
       renderInv();
     })();
